@@ -1,13 +1,14 @@
 var mongoose = require('mongoose');
+var Promise = require("bluebird");
 
-var Schema = mongoose.Schema,
-    ObjectId = Schema.ObjectId;
+var Schema = mongoose.Schema;
 
 
-var contact = new Schema({
-    id: ObjectId,
-    name: String,
-    corp: String,
-    mobilePhone: String,
-    mail: String
+var contactSchema = new Schema({
+    name: {type: String, default: ''},
+    corp: {type: String, default: ''},
+    mobilePhone: {type: String, default: ''},
+    mail: {type: String, default: ''},
+    createdAt : {type:Date, default: Data.now()},
+    lastModify: {type:Date, default: Data.now()}
 });
