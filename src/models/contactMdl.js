@@ -3,7 +3,6 @@ var Promise = require("bluebird");
 
 var Schema = mongoose.Schema;
 
-
 var contactSchema = new Schema({
     name: {type: String, default: ''},
     nameFirstWordChr: {type: String, default: ''},
@@ -26,7 +25,7 @@ contactSchema.static('save', function (contact) {
     })
 });
 
-contactSchema.static('', function (filter, fields) {
+contactSchema.static('findContacts', function (filter, fields) {
     var self = this;
 
     return new Promise(function (resolve, reject) {
