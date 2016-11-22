@@ -10,8 +10,8 @@ var contactSchema = new Schema({
     corp: {type: String, default: ''},
     mobilePhone: {type: String, default: ''},
     mail: {type: String, default: ''},
-    createdAt: {type: Date, default: Data.now()},
-    lastModify: {type: Date, default: Data.now()}
+    createdAt: {type: Date, default: Date.now()},
+    lastModify: {type: Date, default: Date.now()}
 });
 
 contactSchema.static('save', function (contact) {
@@ -25,14 +25,24 @@ contactSchema.static('save', function (contact) {
     })
 });
 
+contactSchema.static('clear',function(){
+    var self = this;
+
+    return new Promise(function(resolve,reject){
+        self.remove('',function(err,data){
+            if(err) return reject(err);
+            return resolve(data);
+        });
+    });
+});
+
 contactSchema.static('findContacts', function (filter, fields) {
     var self = this;
 
     return new Promise(function (resolve, reject) {
-        self.find(filter, fields, {})
-            .exec(function (err, data) {
-                if(err) return reject(err);
-                return resolve(data);
+        self.find(filter, fields, function (err, data) {
+            if(err) return reject(err);
+            return resolve(data);
         });
     });
 });
