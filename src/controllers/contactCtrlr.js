@@ -8,6 +8,7 @@ contactCtrlr.save = function (reqParams) {
     var nameFirstWordChr = reqParams.body.nameFirstWordChr;
     var nameAllWordChr = reqParams.body.nameAllWordChr;
     var corp = reqParams.body.corp;
+    var mobilePhone = reqParams.body.mobilePhone;
     var mail = reqParams.body.mail;
     var dateNow = new Date();
     var createAt = dateNow;
@@ -20,6 +21,7 @@ contactCtrlr.save = function (reqParams) {
             nameAllWordChr: nameAllWordChr,
             corp: corp,
             mail: mail,
+            mobilePhone:mobilePhone,
             dateNow: dateNow,
             createAt: createAt,
             lastModify: lastModify
@@ -41,9 +43,16 @@ contactCtrlr.clear = function () {
     });
 };
 
-contactCtrlr.findAll = function (reqParams) {
+contactCtrlr.findContacts = function (reqParams) {
+    reqParams = reqParams || {};
+    reqParams.body = reqParams.body || {};
+    reqParams.query = reqParams.query || {};
+    var filter = reqParams.query.filter || reqParams.body.filter || {};
+    var fields = reqParams.query.fields || reqParams.body.fields || {};
+    var sort =reqParams.query.sort ||  reqParams.body.sort || {};
+
     return new Promise(function (resolve, reject) {
-        contactMdl.findContacts('', '').then(function (data) {
+        contactMdl.findContacts(filter, fields, sort).then(function (data) {
             resolve({result: 'done', data: data});
         }).catch(function (err) {
             reject({result: 'failed', err: err});

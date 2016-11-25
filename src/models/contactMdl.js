@@ -25,26 +25,26 @@ contactSchema.static('save', function (contact) {
     })
 });
 
-contactSchema.static('clear',function(){
-    var self = this;
-
-    return new Promise(function(resolve,reject){
-        self.remove('',function(err,data){
-            if(err) return reject(err);
-            return resolve(data);
-        });
-    });
-});
-
-contactSchema.static('findContacts', function (filter, fields) {
+contactSchema.static('clear', function () {
     var self = this;
 
     return new Promise(function (resolve, reject) {
-        self.find(filter, fields, function (err, data) {
-            if(err) return reject(err);
+        self.remove('', function (err, data) {
+            if (err) return reject(err);
             return resolve(data);
         });
     });
 });
 
-module.exports = db.model('contact', contactSchema,"contacts");
+contactSchema.static('findContacts', function (filter, fields, sort) {
+    var self = this;
+
+    return new Promise(function (resolve, reject) {
+        self.find(filter, fields, {sort: sort}, function (err, data) {
+            if (err) return reject(err);
+            return resolve(data);
+        });
+    });
+});
+
+module.exports = db.model('contact', contactSchema, "contacts");
