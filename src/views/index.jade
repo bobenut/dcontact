@@ -4,7 +4,7 @@ block cssHead
     link(rel='stylesheet/less', href='/biz/css/screen.less')
 
 block content
-    div(class='container')
+    div(class='container' ng-app='ngappContact')
         div(class='row')
             div(class='col-lg-4')
                 h1 Contact management
@@ -16,38 +16,18 @@ block content
                         span &nbsp;&nbsp;&nbsp;
                         button
                             span(class="glyphicon glyphicon-pencil")
-                    div(class="panel-body")
+                    div(class="panel-body" ng-controller='ctrlrContact')
                         div(style='float: left;width:100%')
                             table(class='table')
                                 thead
                                     tr
                                         th A
-                                tbody
+                                tbody(ng-repeat="conact in contactBlocks.a")
                                     tr
                                         td(style='overflow:hidden')
                                             div(style='float:left')
-                                                div 啊连
-                                                div 13812312338
-                                            div(style='float:right')
-                                                div
-                                                    button(type='button' class='btn btn-info glyphicon glyphicon-list')
-                                                    span &nbsp;&nbsp;&nbsp;
-                                                    button(type='button' class='btn btn-danger glyphicon glyphicon-pencil')
-                                    tr
-                                        td(style='overflow:hidden')
-                                            div(style='float:left')
-                                                div 阿尔法
-                                                div 13812312338
-                                            div(style='float:right')
-                                                div
-                                                    button(type='button' class='btn btn-info glyphicon glyphicon-list')
-                                                    span &nbsp;&nbsp;&nbsp;
-                                                    button(type='button' class='btn btn-danger glyphicon glyphicon-pencil')
-                                    tr
-                                        td(style='overflow:hidden')
-                                            div(style='float:left')
-                                                div 阿土
-                                                div 13812312338
+                                                div {{conact.name}}
+                                                div {{conact.mobilePhone}}
                                             div(style='float:right')
                                                 div
                                                     button(type='button' class='btn btn-info glyphicon glyphicon-list')
@@ -57,35 +37,377 @@ block content
                                 thead
                                     tr
                                         th B
-                                tbody
+                                tbody(ng-repeat="conact in contactBlocks.b")
                                     tr
                                         td(style='overflow:hidden')
                                             div(style='float:left')
-                                                div 博士
-                                                div 13812312338
+                                                div {{conact.name}}
+                                                div {{conact.mobilePhone}}
                                             div(style='float:right')
                                                 div
                                                     button(type='button' class='btn btn-info glyphicon glyphicon-list')
                                                     span &nbsp;&nbsp;&nbsp;
                                                     button(type='button' class='btn btn-danger glyphicon glyphicon-pencil')
+                            table(class='table')
+                                thead
+                                    tr
+                                        th C
+                                tbody(ng-repeat="conact in contactBlocks.c")
                                     tr
                                         td(style='overflow:hidden')
                                             div(style='float:left')
-                                                div 八公
-                                                div 13812312338
+                                                div {{conact.name}}
+                                                div {{conact.mobilePhone}}
                                             div(style='float:right')
                                                 div
                                                     button(type='button' class='btn btn-info glyphicon glyphicon-list')
                                                     span &nbsp;&nbsp;&nbsp;
                                                     button(type='button' class='btn btn-danger glyphicon glyphicon-pencil')
+                            table(class='table')
+                                thead
+                                    tr
+                                        th D
+                                tbody(ng-repeat="conact in contactBlocks.d")
                                     tr
                                         td(style='overflow:hidden')
                                             div(style='float:left')
-                                                div 佰伍音
-                                                div 13812312338
+                                                div {{conact.name}}
+                                                div {{conact.mobilePhone}}
                                             div(style='float:right')
                                                 div
                                                     button(type='button' class='btn btn-info glyphicon glyphicon-list')
                                                     span &nbsp;&nbsp;&nbsp;
                                                     button(type='button' class='btn btn-danger glyphicon glyphicon-pencil')
-                        div(style='float:right;')
+                            table(class='table')
+                                thead
+                                    tr
+                                        th E
+                                tbody(ng-repeat="conact in contactBlocks.e")
+                                    tr
+                                        td(style='overflow:hidden')
+                                            div(style='float:left')
+                                                div {{conact.name}}
+                                                div {{conact.mobilePhone}}
+                                            div(style='float:right')
+                                                div
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-list')
+                                                    span &nbsp;&nbsp;&nbsp;
+                                                    button(type='button' class='btn btn-danger glyphicon glyphicon-pencil')
+                            table(class='table')
+                                thead
+                                    tr
+                                        th F
+                                tbody(ng-repeat="conact in contactBlocks.f")
+                                    tr
+                                        td(style='overflow:hidden')
+                                            div(style='float:left')
+                                                div {{conact.name}}
+                                                div {{conact.mobilePhone}}
+                                            div(style='float:right')
+                                                div
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-list')
+                                                    span &nbsp;&nbsp;&nbsp;
+                                                    button(type='button' class='btn btn-danger glyphicon glyphicon-pencil')
+                            table(class='table')
+                                thead
+                                    tr
+                                        th G
+                                tbody(ng-repeat="conact in contactBlocks.g")
+                                    tr
+                                        td(style='overflow:hidden')
+                                            div(style='float:left')
+                                                div {{conact.name}}
+                                                div {{conact.mobilePhone}}
+                                            div(style='float:right')
+                                                div
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-list')
+                                                    span &nbsp;&nbsp;&nbsp;
+                                                    button(type='button' class='btn btn-danger glyphicon glyphicon-pencil')
+                            table(class='table')
+                                thead
+                                    tr
+                                        th H
+                                tbody(ng-repeat="conact in contactBlocks.h")
+                                    tr
+                                        td(style='overflow:hidden')
+                                            div(style='float:left')
+                                                div {{conact.name}}
+                                                div {{conact.mobilePhone}}
+                                            div(style='float:right')
+                                                div
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-list')
+                                                    span &nbsp;&nbsp;&nbsp;
+                                                    button(type='button' class='btn btn-danger glyphicon glyphicon-pencil')
+                            table(class='table')
+                                thead
+                                    tr
+                                        th I
+                                tbody(ng-repeat="conact in contactBlocks.i")
+                                    tr
+                                        td(style='overflow:hidden')
+                                            div(style='float:left')
+                                                div {{conact.name}}
+                                                div {{conact.mobilePhone}}
+                                            div(style='float:right')
+                                                div
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-list')
+                                                    span &nbsp;&nbsp;&nbsp;
+                                                    button(type='button' class='btn btn-danger glyphicon glyphicon-pencil')
+                            table(class='table')
+                                thead
+                                    tr
+                                        th J
+                                tbody(ng-repeat="conact in contactBlocks.j")
+                                    tr
+                                        td(style='overflow:hidden')
+                                            div(style='float:left')
+                                                div {{conact.name}}
+                                                div {{conact.mobilePhone}}
+                                            div(style='float:right')
+                                                div
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-list')
+                                                    span &nbsp;&nbsp;&nbsp;
+                                                    button(type='button' class='btn btn-danger glyphicon glyphicon-pencil')
+                            table(class='table')
+                                thead
+                                    tr
+                                        th K
+                                tbody(ng-repeat="conact in contactBlocks.k")
+                                    tr
+                                        td(style='overflow:hidden')
+                                            div(style='float:left')
+                                                div {{conact.name}}
+                                                div {{conact.mobilePhone}}
+                                            div(style='float:right')
+                                                div
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-list')
+                                                    span &nbsp;&nbsp;&nbsp;
+                                                    button(type='button' class='btn btn-danger glyphicon glyphicon-pencil')
+                            table(class='table')
+                                thead
+                                    tr
+                                        th L
+                                tbody(ng-repeat="conact in contactBlocks.l")
+                                    tr
+                                        td(style='overflow:hidden')
+                                            div(style='float:left')
+                                                div {{conact.name}}
+                                                div {{conact.mobilePhone}}
+                                            div(style='float:right')
+                                                div
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-list')
+                                                    span &nbsp;&nbsp;&nbsp;
+                                                    button(type='button' class='btn btn-danger glyphicon glyphicon-pencil')
+                            table(class='table')
+                                thead
+                                    tr
+                                        th M
+                                tbody(ng-repeat="conact in contactBlocks.m")
+                                    tr
+                                        td(style='overflow:hidden')
+                                            div(style='float:left')
+                                                div {{conact.name}}
+                                                div {{conact.mobilePhone}}
+                                            div(style='float:right')
+                                                div
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-list')
+                                                    span &nbsp;&nbsp;&nbsp;
+                                                    button(type='button' class='btn btn-danger glyphicon glyphicon-pencil')
+                            table(class='table')
+                                thead
+                                    tr
+                                        th N
+                                tbody(ng-repeat="conact in contactBlocks.n")
+                                    tr
+                                        td(style='overflow:hidden')
+                                            div(style='float:left')
+                                                div {{conact.name}}
+                                                div {{conact.mobilePhone}}
+                                            div(style='float:right')
+                                                div
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-list')
+                                                    span &nbsp;&nbsp;&nbsp;
+                                                    button(type='button' class='btn btn-danger glyphicon glyphicon-pencil')
+                            table(class='table')
+                                thead
+                                    tr
+                                        th O
+                                tbody(ng-repeat="conact in contactBlocks.o")
+                                    tr
+                                        td(style='overflow:hidden')
+                                            div(style='float:left')
+                                                div {{conact.name}}
+                                                div {{conact.mobilePhone}}
+                                            div(style='float:right')
+                                                div
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-list')
+                                                    span &nbsp;&nbsp;&nbsp;
+                                                    button(type='button' class='btn btn-danger glyphicon glyphicon-pencil')
+                            table(class='table')
+                                thead
+                                    tr
+                                        th P
+                                tbody(ng-repeat="conact in contactBlocks.p")
+                                    tr
+                                        td(style='overflow:hidden')
+                                            div(style='float:left')
+                                                div {{conact.name}}
+                                                div {{conact.mobilePhone}}
+                                            div(style='float:right')
+                                                div
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-list')
+                                                    span &nbsp;&nbsp;&nbsp;
+                                                    button(type='button' class='btn btn-danger glyphicon glyphicon-pencil')
+                            table(class='table')
+                                thead
+                                    tr
+                                        th Q
+                                tbody(ng-repeat="conact in contactBlocks.q")
+                                    tr
+                                        td(style='overflow:hidden')
+                                            div(style='float:left')
+                                                div {{conact.name}}
+                                                div {{conact.mobilePhone}}
+                                            div(style='float:right')
+                                                div
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-list')
+                                                    span &nbsp;&nbsp;&nbsp;
+                                                    button(type='button' class='btn btn-danger glyphicon glyphicon-pencil')
+                            table(class='table')
+                                thead
+                                    tr
+                                        th R
+                                tbody(ng-repeat="conact in contactBlocks.r")
+                                    tr
+                                        td(style='overflow:hidden')
+                                            div(style='float:left')
+                                                div {{conact.name}}
+                                                div {{conact.mobilePhone}}
+                                            div(style='float:right')
+                                                div
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-list')
+                                                    span &nbsp;&nbsp;&nbsp;
+                                                    button(type='button' class='btn btn-danger glyphicon glyphicon-pencil')
+                            table(class='table')
+                                thead
+                                    tr
+                                        th S
+                                tbody(ng-repeat="conact in contactBlocks.s")
+                                    tr
+                                        td(style='overflow:hidden')
+                                            div(style='float:left')
+                                                div {{conact.name}}
+                                                div {{conact.mobilePhone}}
+                                            div(style='float:right')
+                                                div
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-list')
+                                                    span &nbsp;&nbsp;&nbsp;
+                                                    button(type='button' class='btn btn-danger glyphicon glyphicon-pencil')
+                            table(class='table')
+                                thead
+                                    tr
+                                        th T
+                                tbody(ng-repeat="conact in contactBlocks.t")
+                                    tr
+                                        td(style='overflow:hidden')
+                                            div(style='float:left')
+                                                div {{conact.name}}
+                                                div {{conact.mobilePhone}}
+                                            div(style='float:right')
+                                                div
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-list')
+                                                    span &nbsp;&nbsp;&nbsp;
+                                                    button(type='button' class='btn btn-danger glyphicon glyphicon-pencil')
+                            table(class='table')
+                                thead
+                                    tr
+                                        th U
+                                tbody(ng-repeat="conact in contactBlocks.u")
+                                    tr
+                                        td(style='overflow:hidden')
+                                            div(style='float:left')
+                                                div {{conact.name}}
+                                                div {{conact.mobilePhone}}
+                                            div(style='float:right')
+                                                div
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-list')
+                                                    span &nbsp;&nbsp;&nbsp;
+                                                    button(type='button' class='btn btn-danger glyphicon glyphicon-pencil')
+                            table(class='table')
+                                thead
+                                    tr
+                                        th V
+                                tbody(ng-repeat="conact in contactBlocks.v")
+                                    tr
+                                        td(style='overflow:hidden')
+                                            div(style='float:left')
+                                                div {{conact.name}}
+                                                div {{conact.mobilePhone}}
+                                            div(style='float:right')
+                                                div
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-list')
+                                                    span &nbsp;&nbsp;&nbsp;
+                                                    button(type='button' class='btn btn-danger glyphicon glyphicon-pencil')
+                            table(class='table')
+                                thead
+                                    tr
+                                        th W
+                                tbody(ng-repeat="conact in contactBlocks.w")
+                                    tr
+                                        td(style='overflow:hidden')
+                                            div(style='float:left')
+                                                div {{conact.name}}
+                                                div {{conact.mobilePhone}}
+                                            div(style='float:right')
+                                                div
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-list')
+                                                    span &nbsp;&nbsp;&nbsp;
+                                                    button(type='button' class='btn btn-danger glyphicon glyphicon-pencil')
+                            table(class='table')
+                                thead
+                                    tr
+                                        th X
+                                tbody(ng-repeat="conact in contactBlocks.x")
+                                    tr
+                                        td(style='overflow:hidden')
+                                            div(style='float:left')
+                                                div {{conact.name}}
+                                                div {{conact.mobilePhone}}
+                                            div(style='float:right')
+                                                div
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-list')
+                                                    span &nbsp;&nbsp;&nbsp;
+                                                    button(type='button' class='btn btn-danger glyphicon glyphicon-pencil')
+                            table(class='table')
+                                thead
+                                    tr
+                                        th Y
+                                tbody(ng-repeat="conact in contactBlocks.y")
+                                    tr
+                                        td(style='overflow:hidden')
+                                            div(style='float:left')
+                                                div {{conact.name}}
+                                                div {{conact.mobilePhone}}
+                                            div(style='float:right')
+                                                div
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-list')
+                                                    span &nbsp;&nbsp;&nbsp;
+                                                    button(type='button' class='btn btn-danger glyphicon glyphicon-pencil')
+                            table(class='table')
+                                thead
+                                    tr
+                                        th Z
+                                tbody(ng-repeat="conact in contactBlocks.z")
+                                    tr
+                                        td(style='overflow:hidden')
+                                            div(style='float:left')
+                                                div {{conact.name}}
+                                                div {{conact.mobilePhone}}
+                                            div(style='float:right')
+                                                div
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-list')
+                                                    span &nbsp;&nbsp;&nbsp;
+                                                    button(type='button' class='btn btn-danger glyphicon glyphicon-pencil')
+
+block jsFoot
+    script(src='/biz/js/ngappContact.js')
