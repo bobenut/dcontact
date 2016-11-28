@@ -4,19 +4,19 @@ block cssHead
     link(rel='stylesheet/less', href='/biz/css/screen.less')
 
 block content
-    div(class='container' ng-app='ngappContact')
-        div(class='row')
-            div(class='col-lg-4')
+    div.container(ng-app='ngappContact')
+        div.row
+            div.col-lg-4
                 h1 Contact management
-            div(class='col-lg-8')
+            div.col-lg-8
                 div(class='panel panel-default' style='min-width:500px;box-shadow:4px 4px 10px #888888;')
                     div(class="panel-heading")
                         button
-                            span(class="glyphicon glyphicon-plus")
+                            span(class="glyphicon glyphicon-plus" data-toggle="modal" data-target="#createContactModalDialog")
                         span &nbsp;&nbsp;&nbsp;
                         button
                             span(class="glyphicon glyphicon-pencil")
-                    div(class="panel-body" ng-controller='ctrlrContact')
+                    div(class="panel-body" ng-controller='ctrlrContactShow')
                         div(style='float: left;width:100%')
                             table(class='table')
                                 thead
@@ -408,6 +408,51 @@ block content
                                                     button(type='button' class='btn btn-info glyphicon glyphicon-list')
                                                     span &nbsp;&nbsp;&nbsp;
                                                     button(type='button' class='btn btn-danger glyphicon glyphicon-pencil')
+
+block modalDialog
+    div.modal.fade#createContactModalDialog(tabindex='-1' role='dialog' ng-controller='ctrlrContactCreate')
+        div.modal-dialog
+            div.modal-content
+                div.modal-header
+                    button.close(type='button' data-dismiss='modal')
+                        span x
+                    h4.modal-title#createContactModalDialogTitle Create contact
+                div.modal-body
+                    div.form-horizontal(role='form')
+                        div.form-group
+                            label.col-sm-3.control-label Name
+                            div.col-sm-9
+                                input.form-control(type='text' placeholder='Name' required)
+
+                        div.form-group
+                            label.col-sm-3.control-label NameFirstWordChr
+                            div.col-sm-9
+                                input.form-control(type='text' placeholder='NameFirstWordChr' required )
+
+                        div.form-group
+                            label.col-sm-3.control-label NameAllWordChr
+                            div.col-sm-9
+                                input.form-control(type='text' placeholder='NameAllWordChr' required )
+
+                        div.form-group
+                            label.col-sm-3.control-label Corp
+                            div.col-sm-9
+                                input.form-control(type='text' placeholder='Corp')
+
+                        div.form-group
+                            label.col-sm-3.control-label Mobile Phone
+                            div.col-sm-9
+                                input.form-control(type='text' placeholder='Mobile Phone' required )
+
+                        div.form-group
+                            label.col-sm-3.control-label Mail
+                            div.col-sm-9
+                                input.form-control(type='text' placeholder='Mail')
+
+                div.modal-footer
+                    button.btn.btn-default(type='button' data-dismiss='modal') Close
+                    button.btn.btn-primary(type='button') Save
+
 
 block jsFoot
     script(src='/biz/js/ngappContact.js')

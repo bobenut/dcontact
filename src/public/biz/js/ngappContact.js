@@ -1,5 +1,5 @@
 var app = angular.module('ngappContact', []);
-app.controller('ctrlrContact', function($scope, $http) {
+app.controller('ctrlrContactShow', function($scope, $http) {
     $scope.contactBlocks = {
         a:[],
         b:[],
@@ -35,4 +35,8 @@ app.controller('ctrlrContact', function($scope, $http) {
             $scope.contactBlocks[c.nameFirstWordChr].push(c);
         }
     });
+});
+
+app.controller('ctrlrContactCreate', function($scope, $http) {
+
 });
