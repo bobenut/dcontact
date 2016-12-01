@@ -420,33 +420,32 @@ block modalDialog
                 div.modal-body
                     div.form-horizontal(role='form')
                         div.form-group
-                            label.col-sm-3.control-label Name
-                            div.col-sm-9
-                                input.form-control(type='text' placeholder='Name' required)
+                            label.col-sm-4.control-label Name
+                            div.col-sm-7
+                                input.form-control(name='name' type='text' placeholder='Name' ng-model='contact.name' pattern="[0-9A-Za-z]{8,16}" title="输入的字符为8-16位" required)
+                        div.form-group
+                            label.col-sm-4.control-label NameFirstWordChr
+                            div.col-sm-7
+                                input.form-control(type='text' placeholder='NameFirstWordChr'  required )
 
                         div.form-group
-                            label.col-sm-3.control-label NameFirstWordChr
-                            div.col-sm-9
-                                input.form-control(type='text' placeholder='NameFirstWordChr' required )
-
-                        div.form-group
-                            label.col-sm-3.control-label NameAllWordChr
-                            div.col-sm-9
+                            label.col-sm-4.control-label NameAllWordChr
+                            div.col-sm-7
                                 input.form-control(type='text' placeholder='NameAllWordChr' required )
 
                         div.form-group
-                            label.col-sm-3.control-label Corp
-                            div.col-sm-9
+                            label.col-sm-4.control-label Corp
+                            div.col-sm-7
                                 input.form-control(type='text' placeholder='Corp')
 
                         div.form-group
-                            label.col-sm-3.control-label Mobile Phone
-                            div.col-sm-9
+                            label.col-sm-4.control-label Mobile Phone
+                            div.col-sm-7
                                 input.form-control(type='text' placeholder='Mobile Phone' required )
 
                         div.form-group
-                            label.col-sm-3.control-label Mail
-                            div.col-sm-9
+                            label.col-sm-4.control-label Mail
+                            div.col-sm-7
                                 input.form-control(type='text' placeholder='Mail')
 
                 div.modal-footer

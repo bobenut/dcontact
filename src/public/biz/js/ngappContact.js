@@ -38,5 +38,11 @@ app.controller('ctrlrContactShow', function($scope, $http) {
 });
 
 app.controller('ctrlrContactCreate', function($scope, $http) {
-
+    $scope.contact = {
+        name:''
+    };
 });
+
+app.directive('errorMessage',['$compile',function($compile){
+
+}]) ;
