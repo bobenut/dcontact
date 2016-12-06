@@ -1,38 +1,37 @@
-
 var app = angular.module('ngappContact', ['ui.bootstrap']);
-app.controller('ctrlrContactShow', function($scope, $http, $modal, $log) {
+app.controller('ctrlrContactShow', function ($scope, $http, $modal, $log) {
     $scope.contactBlocks = {
-        a:[],
-        b:[],
-        c:[],
-        d:[],
-        e:[],
-        f:[],
-        g:[],
-        h:[],
-        i:[],
-        j:[],
-        k:[],
-        l:[],
-        m:[],
-        n:[],
-        o:[],
-        p:[],
-        q:[],
-        r:[],
-        s:[],
-        t:[],
-        u:[],
-        v:[],
-        w:[],
-        x:[],
-        y:[],
-        z:[],
+        a: [],
+        b: [],
+        c: [],
+        d: [],
+        e: [],
+        f: [],
+        g: [],
+        h: [],
+        i: [],
+        j: [],
+        k: [],
+        l: [],
+        m: [],
+        n: [],
+        o: [],
+        p: [],
+        q: [],
+        r: [],
+        s: [],
+        t: [],
+        u: [],
+        v: [],
+        w: [],
+        x: [],
+        y: [],
+        z: [],
     };
 
 
-    $http.get('/contact/data').success(function(data, status, headers, config) {
-        for(var i= 0,c;c=data[i++];){
+    $http.get('/contact/data').success(function (data, status, headers, config) {
+        for (var i = 0, c; c = data[i++];) {
             $scope.contactBlocks[c.nameFirstWordChr].push(c);
         }
     });
@@ -53,28 +52,39 @@ app.controller('ctrlrContactShow', function($scope, $http, $modal, $log) {
 
 });
 
-app.controller('ctrlrContactCreate', function($scope, $modalInstance) {
+app.controller('ctrlrContactCreate', function ($scope, $modalInstance) {
     $scope.contact = {
-        name:'ddd'
+        cname: 'ddd',
+        cnameHasError:false,
+        nameFirstWordChr:'',
+        nameFirstWordChrHasEror:false,
+        nameAllWordChr:'',
+        nameAllWordChrHasEror:false,
+        corp:'',
+        corpHasEror:false,
+        mobilePhone:'',
+        mobilePhoneHasEror:false,
+        mail:'',
+        mailHasEror:false
     };
 
-    $scope.dname='kkk';
-
     $scope.ok = function () {
-        $modalInstance.close('yes kxh');
+        //$modalInstance.close('yes kxh');
+        $scope.contact.nameHasError = true;
     };
 
     $scope.cancel = function () {
-        $modalInstance.dismiss('cancel kxh');
+        //$modalInstance.dismiss('cancel kxh');
+        $scope.contact.nameHasError = false;
     };
 });
 
-app.directive('errorMessage',['$compile',function($compile){
+app.directive('errorMessage', ['$compile', '$log', function ($compile, $log) {
     return {
         restrict: 'A',
         require: 'ngModel',
-        link: function(scope, element, attr, ngModel) {
-
+        link: function (scope, element, attr, ngModel) {
+            $log.info('kxh222');
             var parenNode = element.parent();
             parenNode.addClass("has-feedback");
 
@@ -85,17 +95,17 @@ app.directive('errorMessage',['$compile',function($compile){
             //    pattern:scope.title
             //}
 
-            subScope.hasError=function(){
-                var re=ngModel.$invalid&&ngModel.$dirty;
-                if(re){
+            subScope.hasError = function () {
+                var re = ngModel.$invalid && ngModel.$dirty;
+                if (re) {
                     parenNode.addClass("has-error");
-                }else{
+                } else {
                     parenNode.removeClass("has-error");
                 }
                 return re;
             }
 
-            subScope.errors=function(){
+            subScope.errors = function () {
                 return ngModel.$error;
             }
 
@@ -110,4 +120,4 @@ app.directive('errorMessage',['$compile',function($compile){
             element.after(errorElement)
         }
     };
-}]) ;
+}]);

@@ -17,41 +17,57 @@ block content
                             </div>
                             <div class='modal-body'>
                                 <div class='form-horizontal' role='form'>
-                                    <ng-form name='form'>
+                                    <ng-form name='contactForm'>
                                         <div class='form-group'>
                                             <label class='col-sm-4 control-label'>Name</label>
-                                            <div class='col-sm-7'>
-                                                <input class='form-control' name='name' type='text' placeholder='Name' ng-model='dname' pattern="[0-9A-Za-z]{8,16}" title="输入的字符为8-16位" required/>
+                                            <div class='col-sm-7' ng-class='{"has-error": contactForm.cname.$dirty&&(contactForm.cname.$error.required||contactForm.cname.$error.pattern||contactForm.cname.$error.minlength||contactForm.cname.$error.maxlength)}'>
+                                                <input class='form-control' name='cname' type='text' placeholder='Name' ng-model='contact.cname' ng-pattern="/[0-9A-Za-z]/" ng-minlength="6" ng-maxlength="16" required/>
+                                                <div class="alert alert-danger" style='margin-top: 2px' ng-show="contactForm.cname.$dirty&&(contactForm.cname.$error.required||contactForm.cname.$error.pattern||contactForm.cname.$error.minlength||contactForm.cname.$error.maxlength)">
+                                                    <div>必须输入</div>
+                                                    <div>字符为6-16个</div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class='form-group'>
                                             <label class='col-sm-4 control-label'>NameFirstWordChr</label>
-                                            <div class='col-sm-7'>
-                                                <input class='form-control' type='text' placeholder='NameFirstWordChr'  required />
+                                            <div class='col-sm-7' ng-class='{"has-error": contactForm.nameFirstWordChr.$dirty&&(contactForm.nameFirstWordChr.$error.required||contactForm.nameFirstWordChr.$error.minlength||contactForm.nameFirstWordChr.$error.maxlength)}'>
+                                                <input class='form-control' name='nameFirstWordChr' type='text' placeholder='NameFirstWordChr' ng-model='contact.nameFirstWordChr' ng-minlength="1" ng-maxlength="1" required />
+                                                <div class="alert alert-danger" style='margin-top: 2px' ng-show="contactForm.nameFirstWordChr.$dirty&&(contactForm.nameFirstWordChr.$error.required||contactForm.nameFirstWordChr.$error.minlength||contactForm.nameFirstWordChr.$error.maxlength)">
+                                                    <div>必须输入</div>
+                                                    <div>字符为1个</div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class='form-group'>
                                             <label class='col-sm-4 control-label'>NameAllWordChr</label>
-                                            <div class='col-sm-7'>
-                                                <input class='form-control' type='text' placeholder='NameAllWordChr' required />
+                                            <div class='col-sm-7' ng-class='{"has-error": contactForm.nameAllWordChr.$dirty&&(contactForm.nameAllWordChr.$error.required||contactForm.nameAllWordChr.$error.minlength||contactForm.nameAllWordChr.$error.maxlength)}'>
+                                                <input class='form-control' name='nameAllWordChr' type='text' placeholder='NameAllWordChr' ng-model='contact.nameAllWordChr' ng-minlength="1" ng-maxlength="10"  required />
+                                                <div class="alert alert-danger" style='margin-top: 2px' ng-show="contactForm.nameAllWordChr.$dirty&&(contactForm.nameAllWordChr.$error.required||contactForm.nameAllWordChr.$error.minlength||contactForm.nameAllWordChr.$error.maxlength)">
+                                                    <div>必须输入</div>
+                                                    <div>字符为1-10个</div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class='form-group'>
                                             <label class='col-sm-4 control-label'>Corp</label>
-                                            <div class='col-sm-7'>
-                                                <input class='form-control' type='text' placeholder='Corp' />
+                                            <div class='col-sm-7' ng-class='{"has-error": contact.corpHasEror}'>
+                                                <input class='form-control' type='text' placeholder='Corp' ng-model='contact.corp'/>
                                             </div>
                                         </div>
                                         <div class='form-group'>
                                             <label class='col-sm-4 control-label'>Mobile Phone</label>
-                                            <div class='col-sm-7'>
-                                                <input class='form-control' type='text' placeholder='Mobile Phone' required />
+                                            <div class='col-sm-7' ng-class='{"has-error": contactForm.mobilePhone.$dirty&&(contactForm.mobilePhone.$error.required||contactForm.mobilePhone.$error.minlength||contactForm.mobilePhone.$error.maxlength)}'>
+                                                <input class='form-control' name='mobilePhone' type='text' placeholder='Mobile Phone' ng-model='contact.mobilePhone'ng-minlength="4" ng-maxlength="20"  required />
+                                                <div class="alert alert-danger" style='margin-top: 2px' ng-show="contactForm.mobilePhone.$dirty&&(contactForm.mobilePhone.$error.required||contactForm.mobilePhone.$error.minlength||contactForm.mobilePhone.$error.maxlength)">
+                                                    <div>必须输入</div>
+                                                    <div>字符为4-20个</div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class='form-group'>
                                             <label class='col-sm-4 control-label'> Mail</label>
-                                            <div class='col-sm-7'>
-                                                <input class='form-control' type='text' placeholder='Mail' />
+                                            <div class='col-sm-7' ng-class='{"has-error": contact.mailHasEror}'>
+                                                <input class='form-control' type='text' placeholder='Mail' ng-model='contact.mail' />
                                             </div>
                                         </div>
                                     </ng-form>
