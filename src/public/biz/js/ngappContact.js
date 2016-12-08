@@ -52,72 +52,69 @@ app.controller('ctrlrContactShow', function ($scope, $http, $modal, $log) {
 
 });
 
-app.controller('ctrlrContactCreate', function ($scope, $modalInstance) {
+app.controller('ctrlrContactCreate', function ($scope, $modalInstance, $log) {
+
     $scope.contact = {
-        cname: 'ddd',
-        cnameHasError:false,
-        nameFirstWordChr:'',
-        nameFirstWordChrHasEror:false,
-        nameAllWordChr:'',
-        nameAllWordChrHasEror:false,
-        corp:'',
-        corpHasEror:false,
-        mobilePhone:'',
-        mobilePhoneHasEror:false,
-        mail:'',
-        mailHasEror:false
+        cname: {
+            content: '',
+            hasError: function () {
+                return $scope.contactForm.cname.$dirty && (
+                    $scope.contactForm.cname.$error.required ||
+                    $scope.contactForm.cname.$error.pattern ||
+                    $scope.contactForm.cname.$error.minlength ||
+                    $scope.contactForm.cname.$error.maxlength);
+            }
+        },
+        nameFirstWordChr: {
+            content: '',
+            hasError: function () {
+                return $scope.contactForm.nameFirstWordChr.$dirty && (
+                    $scope.contactForm.nameFirstWordChr.$error.required ||
+                    $scope.contactForm.nameFirstWordChr.$error.minlength ||
+                    $scope.contactForm.nameFirstWordChr.$error.maxlength);
+
+            }
+        },
+        nameAllWordChr: {
+            content: '',
+            hasError: function () {
+                return $scope.contactForm.nameAllWordChr.$dirty && (
+                    $scope.contactForm.nameAllWordChr.$error.required ||
+                    $scope.contactForm.nameAllWordChr.$error.minlength ||
+                    $scope.contactForm.nameAllWordChr.$error.maxlength);
+            }
+        },
+        corp: {
+            content: '',
+            hasError: function () {
+                return false;
+            }
+        },
+        mobilePhone: {
+            content: '',
+            hasError: function () {
+                return $scope.contactForm.mobilePhone.$dirty && (
+                    $scope.contactForm.mobilePhone.$error.required ||
+                    $scope.contactForm.mobilePhone.$error.minlength ||
+                    $scope.contactForm.mobilePhone.$error.maxlength);
+            }
+        },
+        mail: {
+            content: '',
+            hasError: function () {
+                return false;
+            }
+        }
     };
 
     $scope.ok = function () {
-        //$modalInstance.close('yes kxh');
+
         $scope.contact.nameHasError = true;
     };
 
     $scope.cancel = function () {
         //$modalInstance.dismiss('cancel kxh');
+        $log.info($scope.contact.cnameHasError());
         $scope.contact.nameHasError = false;
     };
 });
-
-app.directive('errorMessage', ['$compile', '$log', function ($compile, $log) {
-    return {
-        restrict: 'A',
-        require: 'ngModel',
-        link: function (scope, element, attr, ngModel) {
-            $log.info('kxh222');
-            var parenNode = element.parent();
-            parenNode.addClass("has-feedback");
-
-
-            var subScope = scope.$new(true);
-            //subScope.errorsText={
-            //    required:"此项为必填",
-            //    pattern:scope.title
-            //}
-
-            subScope.hasError = function () {
-                var re = ngModel.$invalid && ngModel.$dirty;
-                if (re) {
-                    parenNode.addClass("has-error");
-                } else {
-                    parenNode.removeClass("has-error");
-                }
-                return re;
-            }
-
-            subScope.errors = function () {
-                return ngModel.$error;
-            }
-
-
-            var errorElement = $compile(`
-                <span   ng-if="hasError()"  class="glyphicon glyphicon-warning-sign form-control-feedback" ></span>
-                <ul class="help-block" ng-if="hasError()">
-                    <li ng-repeat="(error,wrong) in errors()" ng-bind="errorsText[error]">
-                </ul>
-                `)(subScope);
-
-            element.after(errorElement)
-        }
-    };
-}]);
