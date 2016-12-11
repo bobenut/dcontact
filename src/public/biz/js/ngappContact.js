@@ -52,17 +52,17 @@ app.controller('ctrlrContactShow', function ($scope, $http, $modal, $log) {
 
 });
 
-app.controller('ctrlrContactCreate', function ($scope, $modalInstance, $log) {
+app.controller('ctrlrContactCreate', function ($scope, $modalInstance, $http, $log) {
 
     $scope.contact = {
-        cname: {
+        name: {
             content: '',
             hasError: function () {
-                return $scope.contactForm.cname.$dirty && (
-                    $scope.contactForm.cname.$error.required ||
-                    $scope.contactForm.cname.$error.pattern ||
-                    $scope.contactForm.cname.$error.minlength ||
-                    $scope.contactForm.cname.$error.maxlength);
+                return $scope.contactForm.name.$dirty && (
+                    $scope.contactForm.name.$error.required ||
+                    $scope.contactForm.name.$error.pattern ||
+                    $scope.contactForm.name.$error.minlength ||
+                    $scope.contactForm.name.$error.maxlength);
             }
         },
         nameFirstWordChr: {
@@ -107,14 +107,42 @@ app.controller('ctrlrContactCreate', function ($scope, $modalInstance, $log) {
         }
     };
 
-    $scope.ok = function () {
+    function inputIsInvalid() {
+        return $scope.contact.name.hasError() ||
+            $scope.contact.nameFirstWordChr.hasError() ||
+            $scope.contact.nameAllWordChr.hasError() ||
+            $scope.contact.corp.hasError() ||
+            $scope.contact.mobilePhone.hasError() ||
+            $scope.contact.mail.hasError();
+    }
 
-        $scope.contact.nameHasError = true;
+    $scope.save = function () {
+        if (inputIsInvalid()) {
+            return;
+        }
+
+        var contactSaveData = {
+            name: $scope.contact.name.content,
+            nameFirstWordChr: $scope.contact.nameFirstWordChr.content,
+            nameAllWordChr: $scope.contact.nameAllWordChr.content,
+            corp: $scope.contact.corp.content,
+            mobilePhone: $scope.contact.mobilePhone.content,
+            mail: $scope.contact.mail.content,
+        };
+
+        $http.post('/contact/data', contactSaveData).then(
+            function (res) {
+                $log.info('save ok: ' + res);
+                alert('save ok');
+            }, function (res) {
+                $log.info('save failed: ' + res);
+                alert('save failed');
+            });
+
+        $modalInstance.close('done');
     };
 
     $scope.cancel = function () {
-        //$modalInstance.dismiss('cancel kxh');
-        $log.info($scope.contact.cnameHasError());
-        $scope.contact.nameHasError = false;
+        $modalInstance.dismiss('cancel');
     };
 });

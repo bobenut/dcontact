@@ -20,11 +20,11 @@ block content
                                     <ng-form name='contactForm'>
                                         <div class='form-group'>
                                             <label class='col-sm-4 control-label'>Name</label>
-                                            <div class='col-sm-7' ng-class='{"has-error": contact.cname.hasError()}'>
-                                                <input class='form-control' name='cname' type='text' placeholder='Name' ng-model='contact.cname.content' ng-pattern="/[0-9A-Za-z]/" ng-minlength="6" ng-maxlength="16" required/>
-                                                <div class="alert alert-danger" style='margin-top: 2px' ng-show="contact.cname.hasError()">
+                                            <div class='col-sm-7' ng-class='{"has-error": contact.name.hasError()}'>
+                                                <input class='form-control' name='name' type='text' placeholder='Name' ng-model='contact.name.content' ng-pattern="/[0-9A-Za-z\u4e00-\u9fa5^\x00-\xff]/" ng-minlength="2" ng-maxlength="16" required/>
+                                                <div class="alert alert-danger" style='margin-top: 2px' ng-show="contact.name.hasError()">
                                                     <div>必须输入</div>
-                                                    <div>字符为6-16个</div>
+                                                    <div>字符为2-16个</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -75,7 +75,7 @@ block content
                             </div>
                             <div class='modal-footer'>
                                 <button class='btn btn-default' type='button' ng-click='cancel()'>Close</button>
-                                <button class='btn btn-primary' type='button' ng-click='ok()'>Save</button>
+                                <button class='btn btn-primary' type='button' ng-click='save()'>Save</button>
                             </div>
                         button(ng-click="openCreateDialog()")
                             span(class="glyphicon glyphicon-plus")
