@@ -31,4 +31,16 @@ router.post('/data', function (req, res, next) {
         });
 });
 
+router.delete('/data', function (req, res, next) {
+    var reqParams = reqParamsGetter.get(req);
+
+    contactCtrlr.removeOne(reqParams)
+        .then(function (data) {
+            res.send({result: 'success'});
+        })
+        .catch(function (err) {
+            res.send({result: 'failed', errMsg: err});
+        });
+});
+
 module.exports = router;

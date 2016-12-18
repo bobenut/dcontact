@@ -1,40 +1,66 @@
 var app = angular.module('ngappContact', ['ui.bootstrap']);
 app.controller('ctrlrContactShow', function ($scope, $http, $modal, $log) {
-    $scope.contactBlocks = {
-        a: [],
-        b: [],
-        c: [],
-        d: [],
-        e: [],
-        f: [],
-        g: [],
-        h: [],
-        i: [],
-        j: [],
-        k: [],
-        l: [],
-        m: [],
-        n: [],
-        o: [],
-        p: [],
-        q: [],
-        r: [],
-        s: [],
-        t: [],
-        u: [],
-        v: [],
-        w: [],
-        x: [],
-        y: [],
-        z: [],
+
+    $scope.fetchContacts = function () {
+        $scope.contactBlocks = {
+            a: [],
+            b: [],
+            c: [],
+            d: [],
+            e: [],
+            f: [],
+            g: [],
+            h: [],
+            i: [],
+            j: [],
+            k: [],
+            l: [],
+            m: [],
+            n: [],
+            o: [],
+            p: [],
+            q: [],
+            r: [],
+            s: [],
+            t: [],
+            u: [],
+            v: [],
+            w: [],
+            x: [],
+            y: [],
+            z: []
+        };
+
+        $http.get('/contact/data').success(function (data, header, config, status) {
+            for (var i = 0, c; c = data[i++];) {
+                $scope.contactBlocks[c.nameFirstWordChr].push(c);
+            }
+        });
     };
 
-
-    $http.get('/contact/data').success(function (data, status, headers, config) {
-        for (var i = 0, c; c = data[i++];) {
-            $scope.contactBlocks[c.nameFirstWordChr].push(c);
+    $scope.delContact = function (id) {
+        var confirmResult = confirm('delete this contactor?');
+        if (!confirmResult) {
+            $log.info('confirm false.');
+            return;
         }
-    });
+
+        var data = {contactId: id};
+        $http({
+            headers: {
+                'Content-Type': 'application/json; charset=utf-8'
+            },
+            method: 'DELETE',
+            url: '/contact/data',
+            data: data
+        }).success(function (data, header, config, status) {
+            //alert('Delete success: ' + data);
+            $scope.fetchContacts();
+        }).error(function (data, header, config, status) {
+            $log.info('delete contactor error: ' + JSON.stringify(data, null, 2));
+            //alert('Delete failed!');
+        });
+    };
 
     $scope.openCreateDialog = function (size) {
         var modalInstance = $modal.open({
@@ -44,11 +70,14 @@ app.controller('ctrlrContactShow', function ($scope, $http, $modal, $log) {
         });
 
         modalInstance.result.then(function (ret) {
-            $log.info('Modal ok at: ' + ret);
+            $scope.fetchContacts();
+            //$log.info('Modal ok at: ' + ret);
         }, function (ret) {
-            $log.info('Modal dismissed at: ' + ret);
+            //$log.info('Modal dismissed at: ' + ret);
         });
     };
+
+    $scope.fetchContacts();
 
 });
 
@@ -134,12 +163,12 @@ app.controller('ctrlrContactCreate', function ($scope, $modalInstance, $http, $l
             function (res) {
                 $log.info('save ok: ' + res);
                 alert('save ok');
+                $modalInstance.close('done');
             }, function (res) {
                 $log.info('save failed: ' + res);
                 alert('save failed');
+                $modalInstance.close('done');
             });
-
-        $modalInstance.close('done');
     };
 
     $scope.cancel = function () {

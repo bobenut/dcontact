@@ -36,6 +36,17 @@ contactSchema.static('clear', function () {
     });
 });
 
+contactSchema.static('removeOne', function (filter) {
+    var self = this;
+
+    return new Promise(function (resolve, reject) {
+        self.remove(filter, function (err, data) {
+            if (err) return reject(err);
+            return resolve(data);
+        });
+    });
+});
+
 contactSchema.static('findContacts', function (filter, fields, sort) {
     var self = this;
 
