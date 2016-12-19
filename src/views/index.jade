@@ -94,7 +94,7 @@ block content
                                                 div {{conact.mobilePhone}}
                                             div(style='float:right')
                                                 div
-                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil')
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil' ng-click='openEditDialog(conact._id)')
                                                     span &nbsp;&nbsp;&nbsp;
                                                     button(type='button' class='btn btn-danger glyphicon glyphicon-remove' ng-click='delContact(conact._id)')
                             table(class='table')

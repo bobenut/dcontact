@@ -36,6 +36,17 @@ contactSchema.static('clear', function () {
     });
 });
 
+contactSchema.static('findContacts', function (filter, fields, sort) {
+    var self = this;
+
+    return new Promise(function (resolve, reject) {
+        self.find(filter, fields, {sort: sort}, function (err, data) {
+            if (err) return reject(err);
+            return resolve(data);
+        });
+    });
+});
+
 contactSchema.static('removeOne', function (filter) {
     var self = this;
 
@@ -47,11 +58,11 @@ contactSchema.static('removeOne', function (filter) {
     });
 });
 
-contactSchema.static('findContacts', function (filter, fields, sort) {
+contactSchema.static('updateOne', function (filter, value) {
     var self = this;
 
     return new Promise(function (resolve, reject) {
-        self.find(filter, fields, {sort: sort}, function (err, data) {
+        self.update(filter, value, function (err, data) {
             if (err) return reject(err);
             return resolve(data);
         });

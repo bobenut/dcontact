@@ -43,4 +43,17 @@ router.delete('/data', function (req, res, next) {
         });
 });
 
+router.put('/data', function (req, res, next) {
+    var reqParams = reqParamsGetter.get(req);
+    console.log('update one: ' + JSON.stringify(reqParams, null, 2));
+
+    contactCtrlr.updateOne(reqParams)
+        .then(function (data) {
+            res.send({result: 'success'});
+        })
+        .catch(function (err) {
+            res.send({result: 'failed', errMsg: err});
+        });
+});
+
 module.exports = router;
