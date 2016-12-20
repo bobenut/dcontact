@@ -1,5 +1,111 @@
 var app = angular.module('ngappContact', ['ui.bootstrap']);
 
+app.factory('contactCreationOrEditFactory', function () {
+    var service = {
+        scope: null,
+        setScope: function (scope) {
+            this.scope = scope;
+        },
+        getScope: function () {
+            return this.scope;
+        },
+        id: {
+            content: '',
+            hasError: function () {
+                return false;
+            }
+        },
+        name: {
+            content: '',
+            isBeforeSavingHasError: false,
+            hasError: function () {
+                this.isBeforeSavingHasError = false;
+                return service.getScope().contactForm.name.$dirty && (
+                    service.getScope().contactForm.name.$error.required ||
+                    service.getScope().contactForm.name.$error.pattern ||
+                    service.getScope().contactForm.name.$error.minlength ||
+                    service.getScope().contactForm.name.$error.maxlength);
+            },
+            beforeSavingHasError: function () {
+                this.isBeforeSavingHasError = service.getScope().contactForm.name.$error.required ||
+                    service.getScope().contactForm.name.$error.pattern ||
+                    service.getScope().contactForm.name.$error.minlength ||
+                    service.getScope().contactForm.name.$error.maxlength;
+                return this.isBeforeSavingHasError;
+            }
+        },
+        nameFirstWordChr: {
+            content: '',
+            hasError: function () {
+                return service.getScope().contactForm.nameFirstWordChr.$dirty && (
+                    service.getScope().contactForm.nameFirstWordChr.$error.required ||
+                    service.getScope().contactForm.nameFirstWordChr.$error.minlength ||
+                    service.getScope().contactForm.nameFirstWordChr.$error.maxlength);
+            },
+            beforeSavingHasError: function () {
+                return service.getScope().contactForm.nameFirstWordChr.$error.required ||
+                    service.getScope().contactForm.nameFirstWordChr.$error.minlength ||
+                    service.getScope().contactForm.nameFirstWordChr.$error.maxlength;
+            }
+        },
+        nameAllWordChr: {
+            content: '',
+            hasError: function () {
+                return service.getScope().contactForm.nameAllWordChr.$dirty && (
+                    service.getScope().contactForm.nameAllWordChr.$error.required ||
+                    service.getScope().contactForm.nameAllWordChr.$error.minlength ||
+                    service.getScope().contactForm.nameAllWordChr.$error.maxlength);
+            },
+            beforeSavingHasError: function () {
+                return service.getScope().contactForm.nameAllWordChr.$error.required ||
+                    service.getScope().contactForm.nameAllWordChr.$error.minlength ||
+                    service.getScope().contactForm.nameAllWordChr.$error.maxlength;
+            }
+        },
+        corp: {
+            content: '',
+            hasError: function () {
+                return false;
+            },
+            beforeSavingHasError: function () {
+                return false;
+            }
+        },
+        mobilePhone: {
+            content: '',
+            isBeforeSavingHasError: false,
+            hasError: function () {
+                return service.getScope().contactForm.mobilePhone.$dirty && (
+                    service.getScope().contactForm.mobilePhone.$error.required ||
+                    service.getScope().contactForm.mobilePhone.$error.minlength ||
+                    service.getScope().contactForm.mobilePhone.$error.maxlength);
+            },
+            beforeSavingHasError: function () {
+                return service.getScope().contactForm.mobilePhone.$error.required ||
+                    service.getScope().contactForm.mobilePhone.$error.minlength ||
+                    service.getScope().contactForm.mobilePhone.$error.maxlength;
+            }
+        },
+        mail: {
+            content: '',
+            hasError: function () {
+                return false;
+            },
+            beforeSavingHasError: function () {
+                return false;
+            }
+        },
+        beforeSavingInputIsInvalid: function () {
+            return this.name.beforeSavingHasError() ||
+                this.nameFirstWordChr.beforeSavingHasError() ||
+                this.nameAllWordChr.beforeSavingHasError() ||
+                this.mobilePhone.beforeSavingHasError() ||
+                this.mail.beforeSavingHasError();
+        }
+    };
+
+    return service;
+});
 
 app.controller('ctrlrContactShow', function ($scope, $http, $modal, $log) {
 
@@ -82,15 +188,15 @@ app.controller('ctrlrContactShow', function ($scope, $http, $modal, $log) {
         });
     };
 
-    $scope.openEditDialog = function (contactId,size) {
+    $scope.openEditDialog = function (contactId, size) {
         var editableContact = $scope.contacts[contactId];
 
         var modalInstance = $modal.open({
             templateUrl: 'contactDialog.html',
             controller: 'ctrlrContactEdit',
             size: size,
-            resolve:{
-                editableContact: function(){
+            resolve: {
+                editableContact: function () {
                     return editableContact;
                 }
             }
@@ -108,82 +214,25 @@ app.controller('ctrlrContactShow', function ($scope, $http, $modal, $log) {
 
 });
 
-app.controller('ctrlrContactCreate', function ($scope, $modalInstance, $http, $log) {
+app.controller('ctrlrContactCreate', function ($scope, $modalInstance, $http, $log, contactCreationOrEditFactory) {
 
-    $scope.contact = {
-        name: {
-            content: '',
-            hasError: function () {
-                return $scope.contactForm.name.$dirty && (
-                    $scope.contactForm.name.$error.required ||
-                    $scope.contactForm.name.$error.pattern ||
-                    $scope.contactForm.name.$error.minlength ||
-                    $scope.contactForm.name.$error.maxlength);
-            }
-        },
-        nameFirstWordChr: {
-            content: '',
-            hasError: function () {
-                return $scope.contactForm.nameFirstWordChr.$dirty && (
-                    $scope.contactForm.nameFirstWordChr.$error.required ||
-                    $scope.contactForm.nameFirstWordChr.$error.minlength ||
-                    $scope.contactForm.nameFirstWordChr.$error.maxlength);
-
-            }
-        },
-        nameAllWordChr: {
-            content: '',
-            hasError: function () {
-                return $scope.contactForm.nameAllWordChr.$dirty && (
-                    $scope.contactForm.nameAllWordChr.$error.required ||
-                    $scope.contactForm.nameAllWordChr.$error.minlength ||
-                    $scope.contactForm.nameAllWordChr.$error.maxlength);
-            }
-        },
-        corp: {
-            content: '',
-            hasError: function () {
-                return false;
-            }
-        },
-        mobilePhone: {
-            content: '',
-            hasError: function () {
-                return $scope.contactForm.mobilePhone.$dirty && (
-                    $scope.contactForm.mobilePhone.$error.required ||
-                    $scope.contactForm.mobilePhone.$error.minlength ||
-                    $scope.contactForm.mobilePhone.$error.maxlength);
-            }
-        },
-        mail: {
-            content: '',
-            hasError: function () {
-                return false;
-            }
-        }
-    };
-
-    function inputIsInvalid() {
-        return $scope.contact.name.hasError() ||
-            $scope.contact.nameFirstWordChr.hasError() ||
-            $scope.contact.nameAllWordChr.hasError() ||
-            $scope.contact.corp.hasError() ||
-            $scope.contact.mobilePhone.hasError() ||
-            $scope.contact.mail.hasError();
-    }
+    $scope.contactCreationOrEditFactory = contactCreationOrEditFactory;
+    $scope.contactCreationOrEditFactory.setScope($scope);
 
     $scope.save = function () {
-        if (inputIsInvalid()) {
+
+        if ($scope.contactCreationOrEditFactory.beforeSavingInputIsInvalid()) {
+            alert('input error');
             return;
         }
 
         var contactSaveData = {
-            name: $scope.contact.name.content,
-            nameFirstWordChr: $scope.contact.nameFirstWordChr.content,
-            nameAllWordChr: $scope.contact.nameAllWordChr.content,
-            corp: $scope.contact.corp.content,
-            mobilePhone: $scope.contact.mobilePhone.content,
-            mail: $scope.contact.mail.content,
+            name: $scope.contactCreationOrEditFactory.name.content,
+            nameFirstWordChr: $scope.contactCreationOrEditFactory.nameFirstWordChr.content,
+            nameAllWordChr: $scope.contactCreationOrEditFactory.nameAllWordChr.content,
+            corp: $scope.contactCreationOrEditFactory.corp.content,
+            mobilePhone: $scope.contactCreationOrEditFactory.mobilePhone.content,
+            mail: $scope.contactCreationOrEditFactory.mail.content,
         };
 
         $http.post('/contact/data', contactSaveData).then(
@@ -203,89 +252,33 @@ app.controller('ctrlrContactCreate', function ($scope, $modalInstance, $http, $l
     };
 });
 
-app.controller('ctrlrContactEdit', function ($scope, $modalInstance, $http, $log,editableContact) {
+app.controller('ctrlrContactEdit', function ($scope, $modalInstance, $http, $log, contactCreationOrEditFactory, editableContact) {
 
-    $scope.contact = {
-        id:{
-            content: editableContact._id,
-            hasError: function () {
-                return false;
-            }
-        },
-        name: {
-            content: editableContact.name,
-            hasError: function () {
-                return $scope.contactForm.name.$dirty && (
-                    $scope.contactForm.name.$error.required ||
-                    $scope.contactForm.name.$error.pattern ||
-                    $scope.contactForm.name.$error.minlength ||
-                    $scope.contactForm.name.$error.maxlength);
-            }
-        },
-        nameFirstWordChr: {
-            content: editableContact.nameFirstWordChr,
-            hasError: function () {
-                return $scope.contactForm.nameFirstWordChr.$dirty && (
-                    $scope.contactForm.nameFirstWordChr.$error.required ||
-                    $scope.contactForm.nameFirstWordChr.$error.minlength ||
-                    $scope.contactForm.nameFirstWordChr.$error.maxlength);
+    $scope.contactCreationOrEditFactory = contactCreationOrEditFactory;
+    $scope.contactCreationOrEditFactory.setScope($scope);
 
-            }
-        },
-        nameAllWordChr: {
-            content: editableContact.nameAllWordChr,
-            hasError: function () {
-                return $scope.contactForm.nameAllWordChr.$dirty && (
-                    $scope.contactForm.nameAllWordChr.$error.required ||
-                    $scope.contactForm.nameAllWordChr.$error.minlength ||
-                    $scope.contactForm.nameAllWordChr.$error.maxlength);
-            }
-        },
-        corp: {
-            content: editableContact.corp,
-            hasError: function () {
-                return false;
-            }
-        },
-        mobilePhone: {
-            content: editableContact.mobilePhone,
-            hasError: function () {
-                return $scope.contactForm.mobilePhone.$dirty && (
-                    $scope.contactForm.mobilePhone.$error.required ||
-                    $scope.contactForm.mobilePhone.$error.minlength ||
-                    $scope.contactForm.mobilePhone.$error.maxlength);
-            }
-        },
-        mail: {
-            content: editableContact.mail,
-            hasError: function () {
-                return false;
-            }
-        }
-    };
-
-    function inputIsInvalid() {
-        return $scope.contact.name.hasError() ||
-            $scope.contact.nameFirstWordChr.hasError() ||
-            $scope.contact.nameAllWordChr.hasError() ||
-            $scope.contact.corp.hasError() ||
-            $scope.contact.mobilePhone.hasError() ||
-            $scope.contact.mail.hasError();
-    }
+    $scope.contactCreationOrEditFactory.id.content = editableContact._id;
+    $scope.contactCreationOrEditFactory.name.content = editableContact.name;
+    $scope.contactCreationOrEditFactory.nameFirstWordChr.content = editableContact.nameFirstWordChr;
+    $scope.contactCreationOrEditFactory.nameAllWordChr.content = editableContact.nameAllWordChr;
+    $scope.contactCreationOrEditFactory.corp.content = editableContact.corp;
+    $scope.contactCreationOrEditFactory.mobilePhone.content = editableContact.mobilePhone;
+    $scope.contactCreationOrEditFactory.mail.content = editableContact.mail;
 
     $scope.save = function () {
-        if (inputIsInvalid()) {
+
+        if ($scope.contactCreationOrEditFactory.beforeSavingInputIsInvalid()) {
             return;
         }
 
         var contactSaveData = {
-            id: $scope.contact.id.content,
-            name: $scope.contact.name.content,
-            nameFirstWordChr: $scope.contact.nameFirstWordChr.content,
-            nameAllWordChr: $scope.contact.nameAllWordChr.content,
-            corp: $scope.contact.corp.content,
-            mobilePhone: $scope.contact.mobilePhone.content,
-            mail: $scope.contact.mail.content,
+            id: $scope.contactCreationOrEditFactory.id.content,
+            name: $scope.contactCreationOrEditFactory.name.content,
+            nameFirstWordChr: $scope.contactCreationOrEditFactory.nameFirstWordChr.content,
+            nameAllWordChr: $scope.contactCreationOrEditFactory.nameAllWordChr.content,
+            corp: $scope.contactCreationOrEditFactory.corp.content,
+            mobilePhone: $scope.contactCreationOrEditFactory.mobilePhone.content,
+            mail: $scope.contactCreationOrEditFactory.mail.content,
         };
 
         $http.put('/contact/data', contactSaveData).then(

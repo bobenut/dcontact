@@ -20,9 +20,9 @@ block content
                                     <ng-form name='contactForm'>
                                         <div class='form-group'>
                                             <label class='col-sm-4 control-label'>Name</label>
-                                            <div class='col-sm-7' ng-class='{"has-error": contact.name.hasError()}'>
-                                                <input class='form-control' name='name' type='text' placeholder='Name' ng-model='contact.name.content' ng-pattern="/[0-9A-Za-z\u4e00-\u9fa5^\x00-\xff]/" ng-minlength="2" ng-maxlength="16" required/>
-                                                <div class="alert alert-danger" style='margin-top: 2px' ng-show="contact.name.hasError()">
+                                            <div class='col-sm-7' ng-class='{"has-error": contactCreationOrEditFactory.name.hasError()}'>
+                                                <input class='form-control' name='name' type='text' placeholder='Name' ng-model='contactCreationOrEditFactory.name.content' ng-pattern="/[0-9A-Za-z\u4e00-\u9fa5^\x00-\xff]/" ng-minlength="2" ng-maxlength="16" required/>
+                                                <div class="alert alert-danger" style='margin-top: 2px' ng-show='contactCreationOrEditFactory.name.hasError()'>
                                                     <div>必须输入</div>
                                                     <div>字符为2-16个</div>
                                                 </div>
@@ -30,9 +30,9 @@ block content
                                         </div>
                                         <div class='form-group'>
                                             <label class='col-sm-4 control-label'>NameFirstWordChr</label>
-                                            <div class='col-sm-7' ng-class='{"has-error": contact.nameFirstWordChr.hasError()}'>
-                                                <input class='form-control' name='nameFirstWordChr' type='text' placeholder='NameFirstWordChr' ng-model='contact.nameFirstWordChr.content' ng-minlength="1" ng-maxlength="1" required />
-                                                <div class="alert alert-danger" style='margin-top: 2px' ng-show="contact.nameFirstWordChr.hasError()">
+                                            <div class='col-sm-7' ng-class='{"has-error": contactCreationOrEditFactory.nameFirstWordChr.hasError()}'>
+                                                <input class='form-control' name='nameFirstWordChr' type='text' placeholder='NameFirstWordChr' ng-model='contactCreationOrEditFactory.nameFirstWordChr.content' ng-minlength="1" ng-maxlength="1" required />
+                                                <div class="alert alert-danger" style='margin-top: 2px' ng-show="contactCreationOrEditFactory.nameFirstWordChr.hasError()">
                                                     <div>必须输入</div>
                                                     <div>字符为1个</div>
                                                 </div>
@@ -40,9 +40,9 @@ block content
                                         </div>
                                         <div class='form-group'>
                                             <label class='col-sm-4 control-label'>NameAllWordChr</label>
-                                            <div class='col-sm-7' ng-class='{"has-error": contact.nameAllWordChr.hasError()}'>
-                                                <input class='form-control' name='nameAllWordChr' type='text' placeholder='NameAllWordChr' ng-model='contact.nameAllWordChr.content' ng-minlength="1" ng-maxlength="10"  required />
-                                                <div class="alert alert-danger" style='margin-top: 2px' ng-show="contact.nameAllWordChr.hasError()">
+                                            <div class='col-sm-7' ng-class='{"has-error": contactCreationOrEditFactory.nameAllWordChr.hasError()}'>
+                                                <input class='form-control' name='nameAllWordChr' type='text' placeholder='NameAllWordChr' ng-model='contactCreationOrEditFactory.nameAllWordChr.content' ng-minlength="1" ng-maxlength="10"  required />
+                                                <div class="alert alert-danger" style='margin-top: 2px' ng-show="contactCreationOrEditFactory.nameAllWordChr.hasError()">
                                                     <div>必须输入</div>
                                                     <div>字符为1-10个</div>
                                                 </div>
@@ -50,15 +50,15 @@ block content
                                         </div>
                                         <div class='form-group'>
                                             <label class='col-sm-4 control-label'>Corp</label>
-                                            <div class='col-sm-7' ng-class='{"has-error": contact.corp.hasError()}'>
-                                                <input class='form-control' type='text' placeholder='Corp' ng-model='contact.corp.content'/>
+                                            <div class='col-sm-7' ng-class='{"has-error": contactCreationOrEditFactory.corp.hasError()}'>
+                                                <input class='form-control' type='text' placeholder='Corp' ng-model='contactCreationOrEditFactory.corp.content'/>
                                             </div>
                                         </div>
                                         <div class='form-group'>
                                             <label class='col-sm-4 control-label'>Mobile Phone</label>
-                                            <div class='col-sm-7' ng-class='{"has-error": contact.mobilePhone.hasError()}'>
-                                                <input class='form-control' name='mobilePhone' type='text' placeholder='Mobile Phone' ng-model='contact.mobilePhone.content'ng-minlength="4" ng-maxlength="20"  required />
-                                                <div class="alert alert-danger" style='margin-top: 2px' ng-show="contact.mobilePhone.hasError()">
+                                            <div class='col-sm-7' ng-class='{"has-error": contactCreationOrEditFactory.mobilePhone.hasError()}'>
+                                                <input class='form-control' name='mobilePhone' type='text' placeholder='Mobile Phone' ng-model='contactCreationOrEditFactory.mobilePhone.content'ng-minlength="4" ng-maxlength="20"  required />
+                                                <div class="alert alert-danger" style='margin-top: 2px' ng-show="contactCreationOrEditFactory.mobilePhone.hasError()">
                                                     <div>必须输入</div>
                                                     <div>字符为4-20个</div>
                                                 </div>
@@ -66,8 +66,8 @@ block content
                                         </div>
                                         <div class='form-group'>
                                             <label class='col-sm-4 control-label'> Mail</label>
-                                            <div class='col-sm-7' ng-class='{"has-error": contact.mail.hasError()}'>
-                                                <input class='form-control' type='text' placeholder='Mail' ng-model='contact.mail.content' />
+                                            <div class='col-sm-7' ng-class='{"has-error": contactCreationOrEditFactory.mail.hasError()}'>
+                                                <input class='form-control' type='text' placeholder='Mail' ng-model='contactCreationOrEditFactory.mail.content' />
                                             </div>
                                         </div>
                                     </ng-form>
@@ -109,7 +109,7 @@ block content
                                                 div {{conact.mobilePhone}}
                                             div(style='float:right')
                                                 div
-                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil')
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil' ng-click='openEditDialog(conact._id)')
                                                     span &nbsp;&nbsp;&nbsp;
                                                     button(type='button' class='btn btn-danger glyphicon glyphicon-remove' ng-click='delContact(conact._id)')
                             table(class='table')
@@ -124,7 +124,7 @@ block content
                                                 div {{conact.mobilePhone}}
                                             div(style='float:right')
                                                 div
-                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil')
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil' ng-click='openEditDialog(conact._id)')
                                                     span &nbsp;&nbsp;&nbsp;
                                                     button(type='button' class='btn btn-danger glyphicon glyphicon-remove' ng-click='delContact(conact._id)')
                             table(class='table')
@@ -139,7 +139,7 @@ block content
                                                 div {{conact.mobilePhone}}
                                             div(style='float:right')
                                                 div
-                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil')
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil' ng-click='openEditDialog(conact._id)')
                                                     span &nbsp;&nbsp;&nbsp;
                                                     button(type='button' class='btn btn-danger glyphicon glyphicon-remove' ng-click='delContact(conact._id)')
                             table(class='table')
@@ -154,7 +154,7 @@ block content
                                                 div {{conact.mobilePhone}}
                                             div(style='float:right')
                                                 div
-                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil')
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil' ng-click='openEditDialog(conact._id)')
                                                     span &nbsp;&nbsp;&nbsp;
                                                     button(type='button' class='btn btn-danger glyphicon glyphicon-remove' ng-click='delContact(conact._id)')
                             table(class='table')
@@ -169,7 +169,7 @@ block content
                                                 div {{conact.mobilePhone}}
                                             div(style='float:right')
                                                 div
-                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil')
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil' ng-click='openEditDialog(conact._id)')
                                                     span &nbsp;&nbsp;&nbsp;
                                                     button(type='button' class='btn btn-danger glyphicon glyphicon-remove' ng-click='delContact(conact._id)')
                             table(class='table')
@@ -184,7 +184,7 @@ block content
                                                 div {{conact.mobilePhone}}
                                             div(style='float:right')
                                                 div
-                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil')
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil' ng-click='openEditDialog(conact._id)')
                                                     span &nbsp;&nbsp;&nbsp;
                                                     button(type='button' class='btn btn-danger glyphicon glyphicon-remove' ng-click='delContact(conact._id)')
                             table(class='table')
@@ -199,7 +199,7 @@ block content
                                                 div {{conact.mobilePhone}}
                                             div(style='float:right')
                                                 div
-                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil')
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil' ng-click='openEditDialog(conact._id)')
                                                     span &nbsp;&nbsp;&nbsp;
                                                     button(type='button' class='btn btn-danger glyphicon glyphicon-remove' ng-click='delContact(conact._id)')
                             table(class='table')
@@ -214,7 +214,7 @@ block content
                                                 div {{conact.mobilePhone}}
                                             div(style='float:right')
                                                 div
-                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil')
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil' ng-click='openEditDialog(conact._id)')
                                                     span &nbsp;&nbsp;&nbsp;
                                                     button(type='button' class='btn btn-danger glyphicon glyphicon-remove' ng-click='delContact(conact._id)')
                             table(class='table')
@@ -229,7 +229,7 @@ block content
                                                 div {{conact.mobilePhone}}
                                             div(style='float:right')
                                                 div
-                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil')
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil' ng-click='openEditDialog(conact._id)')
                                                     span &nbsp;&nbsp;&nbsp;
                                                     button(type='button' class='btn btn-danger glyphicon glyphicon-remove' ng-click='delContact(conact._id)')
                             table(class='table')
@@ -244,7 +244,7 @@ block content
                                                 div {{conact.mobilePhone}}
                                             div(style='float:right')
                                                 div
-                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil')
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil' ng-click='openEditDialog(conact._id)')
                                                     span &nbsp;&nbsp;&nbsp;
                                                     button(type='button' class='btn btn-danger glyphicon glyphicon-remove' ng-click='delContact(conact._id)')
                             table(class='table')
@@ -259,7 +259,7 @@ block content
                                                 div {{conact.mobilePhone}}
                                             div(style='float:right')
                                                 div
-                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil')
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil' ng-click='openEditDialog(conact._id)')
                                                     span &nbsp;&nbsp;&nbsp;
                                                     button(type='button' class='btn btn-danger glyphicon glyphicon-remove' ng-click='delContact(conact._id)')
                             table(class='table')
@@ -274,7 +274,7 @@ block content
                                                 div {{conact.mobilePhone}}
                                             div(style='float:right')
                                                 div
-                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil')
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil' ng-click='openEditDialog(conact._id)')
                                                     span &nbsp;&nbsp;&nbsp;
                                                     button(type='button' class='btn btn-danger glyphicon glyphicon-remove' ng-click='delContact(conact._id)')
                             table(class='table')
@@ -289,7 +289,7 @@ block content
                                                 div {{conact.mobilePhone}}
                                             div(style='float:right')
                                                 div
-                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil')
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil' ng-click='openEditDialog(conact._id)')
                                                     span &nbsp;&nbsp;&nbsp;
                                                     button(type='button' class='btn btn-danger glyphicon glyphicon-remove' ng-click='delContact(conact._id)')
                             table(class='table')
@@ -304,7 +304,7 @@ block content
                                                 div {{conact.mobilePhone}}
                                             div(style='float:right')
                                                 div
-                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil')
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil' ng-click='openEditDialog(conact._id)')
                                                     span &nbsp;&nbsp;&nbsp;
                                                     button(type='button' class='btn btn-danger glyphicon glyphicon-remove' ng-click='delContact(conact._id)')
                             table(class='table')
@@ -319,7 +319,7 @@ block content
                                                 div {{conact.mobilePhone}}
                                             div(style='float:right')
                                                 div
-                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil')
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil' ng-click='openEditDialog(conact._id)')
                                                     span &nbsp;&nbsp;&nbsp;
                                                     button(type='button' class='btn btn-danger glyphicon glyphicon-remove' ng-click='delContact(conact._id)')
                             table(class='table')
@@ -334,7 +334,7 @@ block content
                                                 div {{conact.mobilePhone}}
                                             div(style='float:right')
                                                 div
-                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil')
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil' ng-click='openEditDialog(conact._id)')
                                                     span &nbsp;&nbsp;&nbsp;
                                                     button(type='button' class='btn btn-danger glyphicon glyphicon-remove' ng-click='delContact(conact._id)')
                             table(class='table')
@@ -349,7 +349,7 @@ block content
                                                 div {{conact.mobilePhone}}
                                             div(style='float:right')
                                                 div
-                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil')
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil' ng-click='openEditDialog(conact._id)')
                                                     span &nbsp;&nbsp;&nbsp;
                                                     button(type='button' class='btn btn-danger glyphicon glyphicon-remove' ng-click='delContact(conact._id)')
                             table(class='table')
@@ -364,7 +364,7 @@ block content
                                                 div {{conact.mobilePhone}}
                                             div(style='float:right')
                                                 div
-                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil')
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil' ng-click='openEditDialog(conact._id)')
                                                     span &nbsp;&nbsp;&nbsp;
                                                     button(type='button' class='btn btn-danger glyphicon glyphicon-remove' ng-click='delContact(conact._id)')
                             table(class='table')
@@ -379,7 +379,7 @@ block content
                                                 div {{conact.mobilePhone}}
                                             div(style='float:right')
                                                 div
-                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil')
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil' ng-click='openEditDialog(conact._id)')
                                                     span &nbsp;&nbsp;&nbsp;
                                                     button(type='button' class='btn btn-danger glyphicon glyphicon-remove' ng-click='delContact(conact._id)')
                             table(class='table')
@@ -394,7 +394,7 @@ block content
                                                 div {{conact.mobilePhone}}
                                             div(style='float:right')
                                                 div
-                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil')
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil' ng-click='openEditDialog(conact._id)')
                                                     span &nbsp;&nbsp;&nbsp;
                                                     button(type='button' class='btn btn-danger glyphicon glyphicon-remove' ng-click='delContact(conact._id)')
                             table(class='table')
@@ -409,7 +409,7 @@ block content
                                                 div {{conact.mobilePhone}}
                                             div(style='float:right')
                                                 div
-                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil')
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil' ng-click='openEditDialog(conact._id)')
                                                     span &nbsp;&nbsp;&nbsp;
                                                     button(type='button' class='btn btn-danger glyphicon glyphicon-remove' ng-click='delContact(conact._id)')
                             table(class='table')
@@ -424,7 +424,7 @@ block content
                                                 div {{conact.mobilePhone}}
                                             div(style='float:right')
                                                 div
-                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil')
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil' ng-click='openEditDialog(conact._id)')
                                                     span &nbsp;&nbsp;&nbsp;
                                                     button(type='button' class='btn btn-danger glyphicon glyphicon-remove' ng-click='delContact(conact._id)')
                             table(class='table')
@@ -439,7 +439,7 @@ block content
                                                 div {{conact.mobilePhone}}
                                             div(style='float:right')
                                                 div
-                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil')
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil' ng-click='openEditDialog(conact._id)')
                                                     span &nbsp;&nbsp;&nbsp;
                                                     button(type='button' class='btn btn-danger glyphicon glyphicon-remove' ng-click='delContact(conact._id)')
                             table(class='table')
@@ -454,7 +454,7 @@ block content
                                                 div {{conact.mobilePhone}}
                                             div(style='float:right')
                                                 div
-                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil')
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil' ng-click='openEditDialog(conact._id)')
                                                     span &nbsp;&nbsp;&nbsp;
                                                     button(type='button' class='btn btn-danger glyphicon glyphicon-remove' ng-click='delContact(conact._id)')
                             table(class='table')
@@ -469,7 +469,7 @@ block content
                                                 div {{conact.mobilePhone}}
                                             div(style='float:right')
                                                 div
-                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil')
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil' ng-click='openEditDialog(conact._id)')
                                                     span &nbsp;&nbsp;&nbsp;
                                                     button(type='button' class='btn btn-danger glyphicon glyphicon-remove' ng-click='delContact(conact._id)')
 
