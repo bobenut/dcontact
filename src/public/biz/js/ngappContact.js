@@ -2,68 +2,107 @@ var app = angular.module('ngappContact', ['ui.bootstrap']);
 
 app.factory('contactCreationOrEditFactory', function () {
     var service = {
-        scope: null,
+        _scope: null,
         setScope: function (scope) {
-            this.scope = scope;
+            this._scope = scope;
         },
         getScope: function () {
-            return this.scope;
+            return this._scope;
+        },
+        _isDidSaveing: false,
+        didSaveing: function () {
+            this._isDidSaveing = true;
+        },
+        isDidSaveing: function () {
+            return this._isDidSaveing;
+        },
+        resetDidSaveing: function () {
+            this._isDidSaveing= false;
         },
         id: {
             content: '',
+            resetContent:function(){
+                this.content = '';
+            },
             hasError: function () {
                 return false;
             }
         },
         name: {
             content: '',
-            isBeforeSavingHasError: false,
-            hasError: function () {
-                this.isBeforeSavingHasError = false;
-                return service.getScope().contactForm.name.$dirty && (
-                    service.getScope().contactForm.name.$error.required ||
-                    service.getScope().contactForm.name.$error.pattern ||
-                    service.getScope().contactForm.name.$error.minlength ||
-                    service.getScope().contactForm.name.$error.maxlength);
+            resetContent:function(){
+                this.content = '';
             },
-            beforeSavingHasError: function () {
-                this.isBeforeSavingHasError = service.getScope().contactForm.name.$error.required ||
+            hasError: function () {
+                var result = false;
+
+                var isDirty = service.getScope().contactForm.name.$dirty;
+                var isInvalid = service.getScope().contactForm.name.$error.required ||
                     service.getScope().contactForm.name.$error.pattern ||
                     service.getScope().contactForm.name.$error.minlength ||
                     service.getScope().contactForm.name.$error.maxlength;
-                return this.isBeforeSavingHasError;
-            }
+
+                if (service.isDidSaveing()) {
+                    result = isInvalid;
+                }
+                else {
+                    result = isDirty & isInvalid;
+                }
+
+                return result;
+            },
         },
         nameFirstWordChr: {
             content: '',
-            hasError: function () {
-                return service.getScope().contactForm.nameFirstWordChr.$dirty && (
-                    service.getScope().contactForm.nameFirstWordChr.$error.required ||
-                    service.getScope().contactForm.nameFirstWordChr.$error.minlength ||
-                    service.getScope().contactForm.nameFirstWordChr.$error.maxlength);
+            resetContent:function(){
+                this.content = '';
             },
-            beforeSavingHasError: function () {
-                return service.getScope().contactForm.nameFirstWordChr.$error.required ||
+            hasError: function () {
+                var result = false;
+
+                var isDirty = service.getScope().contactForm.nameFirstWordChr.$dirty;
+                var isInvalid = service.getScope().contactForm.nameFirstWordChr.$error.required ||
                     service.getScope().contactForm.nameFirstWordChr.$error.minlength ||
                     service.getScope().contactForm.nameFirstWordChr.$error.maxlength;
+
+                if (service.isDidSaveing()) {
+                    result = isInvalid;
+                }
+                else {
+                    result = isDirty & isInvalid;
+                }
+
+                return result;
             }
         },
         nameAllWordChr: {
             content: '',
-            hasError: function () {
-                return service.getScope().contactForm.nameAllWordChr.$dirty && (
-                    service.getScope().contactForm.nameAllWordChr.$error.required ||
-                    service.getScope().contactForm.nameAllWordChr.$error.minlength ||
-                    service.getScope().contactForm.nameAllWordChr.$error.maxlength);
+            resetContent:function(){
+                this.content = '';
             },
-            beforeSavingHasError: function () {
-                return service.getScope().contactForm.nameAllWordChr.$error.required ||
+            hasError: function () {
+                var result;
+
+                var isDirty = service.getScope().contactForm.nameAllWordChr.$dirty;
+                var isInvalid = service.getScope().contactForm.nameAllWordChr.$error.required ||
                     service.getScope().contactForm.nameAllWordChr.$error.minlength ||
                     service.getScope().contactForm.nameAllWordChr.$error.maxlength;
-            }
+
+                if (service.isDidSaveing()) {
+                    result = isInvalid;
+                }
+                else {
+                    result = isDirty & isInvalid;
+                }
+
+                return result;
+            },
         },
         corp: {
             content: '',
+            resetContent:function(){
+                this.content = '';
+            },
             hasError: function () {
                 return false;
             },
@@ -73,34 +112,52 @@ app.factory('contactCreationOrEditFactory', function () {
         },
         mobilePhone: {
             content: '',
+            resetContent:function(){
+                this.content = '';
+            },
             isBeforeSavingHasError: false,
             hasError: function () {
-                return service.getScope().contactForm.mobilePhone.$dirty && (
-                    service.getScope().contactForm.mobilePhone.$error.required ||
-                    service.getScope().contactForm.mobilePhone.$error.minlength ||
-                    service.getScope().contactForm.mobilePhone.$error.maxlength);
-            },
-            beforeSavingHasError: function () {
-                return service.getScope().contactForm.mobilePhone.$error.required ||
+                var result;
+
+                var isDirty = service.getScope().contactForm.mobilePhone.$dirty;
+                var isInvalid = service.getScope().contactForm.mobilePhone.$error.required ||
                     service.getScope().contactForm.mobilePhone.$error.minlength ||
                     service.getScope().contactForm.mobilePhone.$error.maxlength;
-            }
+
+                if (service.isDidSaveing()) {
+                    result = isInvalid;
+                }
+                else {
+                    result = isDirty & isInvalid;
+                }
+
+                return result;
+            },
         },
         mail: {
             content: '',
+            resetContent:function(){
+                this.content = '';
+            },
             hasError: function () {
                 return false;
             },
-            beforeSavingHasError: function () {
-                return false;
-            }
         },
         beforeSavingInputIsInvalid: function () {
-            return this.name.beforeSavingHasError() ||
-                this.nameFirstWordChr.beforeSavingHasError() ||
-                this.nameAllWordChr.beforeSavingHasError() ||
-                this.mobilePhone.beforeSavingHasError() ||
-                this.mail.beforeSavingHasError();
+            return this.name.hasError() ||
+                this.nameFirstWordChr.hasError() ||
+                this.nameAllWordChr.hasError() ||
+                this.mobilePhone.hasError() ||
+                this.mail.hasError();
+        },
+        reset:function(){
+            this.id.resetContent();
+            this.name.resetContent();
+            this.nameFirstWordChr.resetContent();
+            this.nameAllWordChr.resetContent();
+            this.mobilePhone.resetContent();
+            this.mail.resetContent();
+            this.resetDidSaveing();
         }
     };
 
@@ -218,11 +275,11 @@ app.controller('ctrlrContactCreate', function ($scope, $modalInstance, $http, $l
 
     $scope.contactCreationOrEditFactory = contactCreationOrEditFactory;
     $scope.contactCreationOrEditFactory.setScope($scope);
+    $scope.contactCreationOrEditFactory.reset();
 
     $scope.save = function () {
-
+        $scope.contactCreationOrEditFactory.didSaveing();
         if ($scope.contactCreationOrEditFactory.beforeSavingInputIsInvalid()) {
-            alert('input error');
             return;
         }
 
@@ -256,6 +313,7 @@ app.controller('ctrlrContactEdit', function ($scope, $modalInstance, $http, $log
 
     $scope.contactCreationOrEditFactory = contactCreationOrEditFactory;
     $scope.contactCreationOrEditFactory.setScope($scope);
+    $scope.contactCreationOrEditFactory.reset();
 
     $scope.contactCreationOrEditFactory.id.content = editableContact._id;
     $scope.contactCreationOrEditFactory.name.content = editableContact.name;
@@ -266,7 +324,7 @@ app.controller('ctrlrContactEdit', function ($scope, $modalInstance, $http, $log
     $scope.contactCreationOrEditFactory.mail.content = editableContact.mail;
 
     $scope.save = function () {
-
+        $scope.contactCreationOrEditFactory.didSaveing();
         if ($scope.contactCreationOrEditFactory.beforeSavingInputIsInvalid()) {
             return;
         }
