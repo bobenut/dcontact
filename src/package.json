@@ -17,6 +17,9 @@
     "serve-favicon": "~2.3.0"
   },
   "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-jsmin": "^0.1.5",
+    "gulp-uglify": "^2.0.0",
     "should": "^11.1.1"
   }
 }
