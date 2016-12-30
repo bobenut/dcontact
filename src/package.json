@@ -18,7 +18,9 @@
   },
   "devDependencies": {
     "gulp": "^3.9.1",
+    "gulp-clean": "^0.3.2",
     "gulp-jsmin": "^0.1.5",
+    "gulp-sequence": "^0.4.6",
     "gulp-uglify": "^2.0.0",
     "should": "^11.1.1"
   }

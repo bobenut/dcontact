@@ -1,7 +1,10 @@
 var gulp = require('gulp'),
-    uglify = require('gulp-uglify');
+    uglify = require('gulp-uglify'),
+    clean = require('gulp-clean'),
+    sequence = require('gulp-sequence');
 
-gulp.task('default', [
+gulp.task('default',sequence(
+    'gulp_clean',
     'gulp_controllers_uglify',
     'gulp_models_uglify',
     'gulp_routes_uglify',
@@ -14,7 +17,12 @@ gulp.task('default', [
     'gulp_node_modules_copy',
     'gulp_main_file_uglify',
     'gulp_main_file_copy'
-]);
+));
+
+gulp.task('gulp_clean', function () {
+    return gulp.src('../bin/app', {read: false})
+        .pipe(clean({force:true}));
+});
 
 gulp.task('gulp_controllers_uglify', function () {
     return gulp.src('controllers/*.js')
