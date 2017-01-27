@@ -22,7 +22,7 @@ block content
                                             <label class='col-sm-4 control-label'>Name</label>
                                             <div class='col-sm-7' ng-class='{"has-error": contactCreationOrEditFactory.name.hasError()}'>
                                                 <input class='form-control' name='name' type='text' placeholder='Name' ng-model='contactCreationOrEditFactory.name.content' ng-pattern="/[0-9A-Za-z\u4e00-\u9fa5^\x00-\xff]/" ng-minlength="2" ng-maxlength="16" required/>
-                                                <div class="alert alert-danger" style='margin-top: 2px' ng-show='contactCreationOrEditFactory.name.hasError()'>
+                                                <div id="nameErrorInfo" class="alert alert-danger" style='margin-top: 2px' ng-show='contactCreationOrEditFactory.name.hasError()'>
                                                     <div>必须输入</div>
                                                     <div>字符为2-16个</div>
                                                 </div>
@@ -32,7 +32,7 @@ block content
                                             <label class='col-sm-4 control-label'>NameFirstWordChr</label>
                                             <div class='col-sm-7' ng-class='{"has-error": contactCreationOrEditFactory.nameFirstWordChr.hasError()}'>
                                                 <input class='form-control' name='nameFirstWordChr' type='text' placeholder='NameFirstWordChr' ng-model='contactCreationOrEditFactory.nameFirstWordChr.content' ng-minlength="1" ng-maxlength="1" required />
-                                                <div class="alert alert-danger" style='margin-top: 2px' ng-show="contactCreationOrEditFactory.nameFirstWordChr.hasError()">
+                                                <div id="nameFirstWordChrErrorInfo" class="alert alert-danger" style='margin-top: 2px' ng-show="contactCreationOrEditFactory.nameFirstWordChr.hasError()">
                                                     <div>必须输入</div>
                                                     <div>字符为1个</div>
                                                 </div>
@@ -42,7 +42,7 @@ block content
                                             <label class='col-sm-4 control-label'>NameAllWordChr</label>
                                             <div class='col-sm-7' ng-class='{"has-error": contactCreationOrEditFactory.nameAllWordChr.hasError()}'>
                                                 <input class='form-control' name='nameAllWordChr' type='text' placeholder='NameAllWordChr' ng-model='contactCreationOrEditFactory.nameAllWordChr.content' ng-minlength="1" ng-maxlength="10"  required />
-                                                <div class="alert alert-danger" style='margin-top: 2px' ng-show="contactCreationOrEditFactory.nameAllWordChr.hasError()">
+                                                <div id="nameAllWordChrErrorInfo" class="alert alert-danger" style='margin-top: 2px' ng-show="contactCreationOrEditFactory.nameAllWordChr.hasError()">
                                                     <div>必须输入</div>
                                                     <div>字符为1-10个</div>
                                                 </div>
@@ -58,7 +58,7 @@ block content
                                             <label class='col-sm-4 control-label'>Mobile Phone</label>
                                             <div class='col-sm-7' ng-class='{"has-error": contactCreationOrEditFactory.mobilePhone.hasError()}'>
                                                 <input class='form-control' name='mobilePhone' type='text' placeholder='Mobile Phone' ng-model='contactCreationOrEditFactory.mobilePhone.content'ng-minlength="4" ng-maxlength="20"  required />
-                                                <div class="alert alert-danger" style='margin-top: 2px' ng-show="contactCreationOrEditFactory.mobilePhone.hasError()">
+                                                <div id="mobilePhoneErrorInfo" class="alert alert-danger" style='margin-top: 2px' ng-show="contactCreationOrEditFactory.mobilePhone.hasError()">
                                                     <div>必须输入</div>
                                                     <div>字符为4-20个</div>
                                                 </div>
@@ -74,10 +74,10 @@ block content
                                 </div>
                             </div>
                             <div class='modal-footer'>
-                                <button class='btn btn-default' type='button' ng-click='cancel()'>Close</button>
-                                <button class='btn btn-primary' type='button' ng-click='save()'>Save</button>
+                                <button id='btnCancel' class='btn btn-default' type='button' ng-click='cancel()'>Close</button>
+                                <button id='btnSave' class='btn btn-primary' type='button' ng-click='save()'>Save</button>
                             </div>
-                        button(ng-click="openCreateDialog()")
+                        button(id='btnCreate', ng-click="openCreateDialog()")
                             span(class="glyphicon glyphicon-plus")
                         span &nbsp;&nbsp;&nbsp;
                     div(class="panel-body")
