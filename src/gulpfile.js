@@ -10,6 +10,7 @@ gulp.task('default',sequence(
     'gulp_routes_uglify',
     'gulp_utilities_uglify',
     'gulp_views_copy',
+    'gulp_test_copy',
     'gulp_public_biz_css_copy',
     'gulp_public_biz_imgs_copy',
     'gulp_public_biz_js_uglify',
@@ -51,6 +52,11 @@ gulp.task('gulp_utilities_uglify', function () {
 gulp.task('gulp_views_copy', function () {
     return gulp.src('views/**/*')
         .pipe(gulp.dest('../bin/app/views'));
+});
+
+gulp.task('gulp_test_copy', function () {
+    return gulp.src('test/**/*')
+        .pipe(gulp.dest('../bin/app/test'));
 });
 
 gulp.task('gulp_public_biz_css_copy', function () {
