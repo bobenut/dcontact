@@ -1,2 +1,4 @@
 cd ../src
-gulp
+call gulp
+@echo off
+pause
