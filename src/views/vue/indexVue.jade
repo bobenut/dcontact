@@ -1,0 +1,478 @@
+extends layoutAg
+
+block cssHead
+    link(rel='stylesheet/less', href='/biz/css/screen.less')
+
+block content
+    div.container(ng-app='ngappContact')
+        div.row
+            div.col-lg-4
+                h1 Contact management
+            div.col-lg-8
+                div(class='panel panel-default' style='min-width:500px;box-shadow:4px 4px 10px #888888;' ng-controller='ctrlrContactShow')
+                    div(class="panel-heading")
+                        script(type='text/ng-template' id='contactDialog.html').
+                            <div class='modal-header'>
+                                <h4 class="modal-title">Create contact</h4>
+                            </div>
+                            <div class='modal-body'>
+                                <div class='form-horizontal' role='form'>
+                                    <ng-form name='contactForm'>
+                                        <div class='form-group'>
+                                            <label class='col-sm-4 control-label'>Name</label>
+                                            <div class='col-sm-7' ng-class='{"has-error": contactCreationOrEditFactory.name.hasError()}'>
+                                                <input class='form-control' name='name' type='text' placeholder='Name' ng-model='contactCreationOrEditFactory.name.content' ng-pattern="/[0-9A-Za-z\u4e00-\u9fa5^\x00-\xff]/" ng-minlength="2" ng-maxlength="16" required/>
+                                                <div id="nameErrorInfo" class="alert alert-danger" style='margin-top: 2px' ng-show='contactCreationOrEditFactory.name.hasError()'>
+                                                    <div>必须输入</div>
+                                                    <div>字符为2-16个</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class='form-group'>
+                                            <label class='col-sm-4 control-label'>NameFirstWordChr</label>
+                                            <div class='col-sm-7' ng-class='{"has-error": contactCreationOrEditFactory.nameFirstWordChr.hasError()}'>
+                                                <input class='form-control' name='nameFirstWordChr' type='text' placeholder='NameFirstWordChr' ng-model='contactCreationOrEditFactory.nameFirstWordChr.content' ng-minlength="1" ng-maxlength="1" required />
+                                                <div id="nameFirstWordChrErrorInfo" class="alert alert-danger" style='margin-top: 2px' ng-show="contactCreationOrEditFactory.nameFirstWordChr.hasError()">
+                                                    <div>必须输入</div>
+                                                    <div>字符为1个</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class='form-group'>
+                                            <label class='col-sm-4 control-label'>NameAllWordChr</label>
+                                            <div class='col-sm-7' ng-class='{"has-error": contactCreationOrEditFactory.nameAllWordChr.hasError()}'>
+                                                <input class='form-control' name='nameAllWordChr' type='text' placeholder='NameAllWordChr' ng-model='contactCreationOrEditFactory.nameAllWordChr.content' ng-minlength="1" ng-maxlength="10"  required />
+                                                <div id="nameAllWordChrErrorInfo" class="alert alert-danger" style='margin-top: 2px' ng-show="contactCreationOrEditFactory.nameAllWordChr.hasError()">
+                                                    <div>必须输入</div>
+                                                    <div>字符为1-10个</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class='form-group'>
+                                            <label class='col-sm-4 control-label'>Corp</label>
+                                            <div class='col-sm-7' ng-class='{"has-error": contactCreationOrEditFactory.corp.hasError()}'>
+                                                <input class='form-control' type='text' placeholder='Corp' ng-model='contactCreationOrEditFactory.corp.content'/>
+                                            </div>
+                                        </div>
+                                        <div class='form-group'>
+                                            <label class='col-sm-4 control-label'>Mobile Phone</label>
+                                            <div class='col-sm-7' ng-class='{"has-error": contactCreationOrEditFactory.mobilePhone.hasError()}'>
+                                                <input class='form-control' name='mobilePhone' type='text' placeholder='Mobile Phone' ng-model='contactCreationOrEditFactory.mobilePhone.content'ng-minlength="4" ng-maxlength="20"  required />
+                                                <div id="mobilePhoneErrorInfo" class="alert alert-danger" style='margin-top: 2px' ng-show="contactCreationOrEditFactory.mobilePhone.hasError()">
+                                                    <div>必须输入</div>
+                                                    <div>字符为4-20个</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class='form-group'>
+                                            <label class='col-sm-4 control-label'> Mail</label>
+                                            <div class='col-sm-7' ng-class='{"has-error": contactCreationOrEditFactory.mail.hasError()}'>
+                                                <input class='form-control' type='text' placeholder='Mail' ng-model='contactCreationOrEditFactory.mail.content' />
+                                            </div>
+                                        </div>
+                                    </ng-form>
+                                </div>
+                            </div>
+                            <div class='modal-footer'>
+                                <button id='btnCancel' class='btn btn-default' type='button' ng-click='cancel()'>Close</button>
+                                <button id='btnSave' class='btn btn-primary' type='button' ng-click='save()'>Save</button>
+                            </div>
+                        button(id='btnCreate', ng-click="openCreateDialog()")
+                            span(class="glyphicon glyphicon-plus")
+                        span &nbsp;&nbsp;&nbsp;
+                    div(class="panel-body")
+                        div(style='float: left;width:100%')
+                            table(class='table')
+                                thead
+                                    tr
+                                        th A
+                                tbody(ng-repeat="conact in contactBlocks.a")
+                                    tr
+                                        td(style='overflow:hidden')
+                                            div(style='float:left')
+                                                div {{conact.name}}
+                                                div {{conact.mobilePhone}}
+                                            div(style='float:right')
+                                                div
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil' ng-click='openEditDialog(conact._id)')
+                                                    span &nbsp;&nbsp;&nbsp;
+                                                    button(type='button' class='btn btn-danger glyphicon glyphicon-remove' ng-click='delContact(conact._id)')
+                            table(class='table')
+                                thead
+                                    tr
+                                        th B
+                                tbody(ng-repeat="conact in contactBlocks.b")
+                                    tr
+                                        td(style='overflow:hidden')
+                                            div(style='float:left')
+                                                div {{conact.name}}
+                                                div {{conact.mobilePhone}}
+                                            div(style='float:right')
+                                                div
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil' ng-click='openEditDialog(conact._id)')
+                                                    span &nbsp;&nbsp;&nbsp;
+                                                    button(type='button' class='btn btn-danger glyphicon glyphicon-remove' ng-click='delContact(conact._id)')
+                            table(class='table')
+                                thead
+                                    tr
+                                        th C
+                                tbody(ng-repeat="conact in contactBlocks.c")
+                                    tr
+                                        td(style='overflow:hidden')
+                                            div(style='float:left')
+                                                div {{conact.name}}
+                                                div {{conact.mobilePhone}}
+                                            div(style='float:right')
+                                                div
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil' ng-click='openEditDialog(conact._id)')
+                                                    span &nbsp;&nbsp;&nbsp;
+                                                    button(type='button' class='btn btn-danger glyphicon glyphicon-remove' ng-click='delContact(conact._id)')
+                            table(class='table')
+                                thead
+                                    tr
+                                        th D
+                                tbody(ng-repeat="conact in contactBlocks.d")
+                                    tr
+                                        td(style='overflow:hidden')
+                                            div(style='float:left')
+                                                div {{conact.name}}
+                                                div {{conact.mobilePhone}}
+                                            div(style='float:right')
+                                                div
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil' ng-click='openEditDialog(conact._id)')
+                                                    span &nbsp;&nbsp;&nbsp;
+                                                    button(type='button' class='btn btn-danger glyphicon glyphicon-remove' ng-click='delContact(conact._id)')
+                            table(class='table')
+                                thead
+                                    tr
+                                        th E
+                                tbody(ng-repeat="conact in contactBlocks.e")
+                                    tr
+                                        td(style='overflow:hidden')
+                                            div(style='float:left')
+                                                div {{conact.name}}
+                                                div {{conact.mobilePhone}}
+                                            div(style='float:right')
+                                                div
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil' ng-click='openEditDialog(conact._id)')
+                                                    span &nbsp;&nbsp;&nbsp;
+                                                    button(type='button' class='btn btn-danger glyphicon glyphicon-remove' ng-click='delContact(conact._id)')
+                            table(class='table')
+                                thead
+                                    tr
+                                        th F
+                                tbody(ng-repeat="conact in contactBlocks.f")
+                                    tr
+                                        td(style='overflow:hidden')
+                                            div(style='float:left')
+                                                div {{conact.name}}
+                                                div {{conact.mobilePhone}}
+                                            div(style='float:right')
+                                                div
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil' ng-click='openEditDialog(conact._id)')
+                                                    span &nbsp;&nbsp;&nbsp;
+                                                    button(type='button' class='btn btn-danger glyphicon glyphicon-remove' ng-click='delContact(conact._id)')
+                            table(class='table')
+                                thead
+                                    tr
+                                        th G
+                                tbody(ng-repeat="conact in contactBlocks.g")
+                                    tr
+                                        td(style='overflow:hidden')
+                                            div(style='float:left')
+                                                div {{conact.name}}
+                                                div {{conact.mobilePhone}}
+                                            div(style='float:right')
+                                                div
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil' ng-click='openEditDialog(conact._id)')
+                                                    span &nbsp;&nbsp;&nbsp;
+                                                    button(type='button' class='btn btn-danger glyphicon glyphicon-remove' ng-click='delContact(conact._id)')
+                            table(class='table')
+                                thead
+                                    tr
+                                        th H
+                                tbody(ng-repeat="conact in contactBlocks.h")
+                                    tr
+                                        td(style='overflow:hidden')
+                                            div(style='float:left')
+                                                div {{conact.name}}
+                                                div {{conact.mobilePhone}}
+                                            div(style='float:right')
+                                                div
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil' ng-click='openEditDialog(conact._id)')
+                                                    span &nbsp;&nbsp;&nbsp;
+                                                    button(type='button' class='btn btn-danger glyphicon glyphicon-remove' ng-click='delContact(conact._id)')
+                            table(class='table')
+                                thead
+                                    tr
+                                        th I
+                                tbody(ng-repeat="conact in contactBlocks.i")
+                                    tr
+                                        td(style='overflow:hidden')
+                                            div(style='float:left')
+                                                div {{conact.name}}
+                                                div {{conact.mobilePhone}}
+                                            div(style='float:right')
+                                                div
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil' ng-click='openEditDialog(conact._id)')
+                                                    span &nbsp;&nbsp;&nbsp;
+                                                    button(type='button' class='btn btn-danger glyphicon glyphicon-remove' ng-click='delContact(conact._id)')
+                            table(class='table')
+                                thead
+                                    tr
+                                        th J
+                                tbody(ng-repeat="conact in contactBlocks.j")
+                                    tr
+                                        td(style='overflow:hidden')
+                                            div(style='float:left')
+                                                div {{conact.name}}
+                                                div {{conact.mobilePhone}}
+                                            div(style='float:right')
+                                                div
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil' ng-click='openEditDialog(conact._id)')
+                                                    span &nbsp;&nbsp;&nbsp;
+                                                    button(type='button' class='btn btn-danger glyphicon glyphicon-remove' ng-click='delContact(conact._id)')
+                            table(class='table')
+                                thead
+                                    tr
+                                        th K
+                                tbody(ng-repeat="conact in contactBlocks.k")
+                                    tr
+                                        td(style='overflow:hidden')
+                                            div(style='float:left')
+                                                div {{conact.name}}
+                                                div {{conact.mobilePhone}}
+                                            div(style='float:right')
+                                                div
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil' ng-click='openEditDialog(conact._id)')
+                                                    span &nbsp;&nbsp;&nbsp;
+                                                    button(type='button' class='btn btn-danger glyphicon glyphicon-remove' ng-click='delContact(conact._id)')
+                            table(class='table')
+                                thead
+                                    tr
+                                        th L
+                                tbody(ng-repeat="conact in contactBlocks.l")
+                                    tr
+                                        td(style='overflow:hidden')
+                                            div(style='float:left')
+                                                div {{conact.name}}
+                                                div {{conact.mobilePhone}}
+                                            div(style='float:right')
+                                                div
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil' ng-click='openEditDialog(conact._id)')
+                                                    span &nbsp;&nbsp;&nbsp;
+                                                    button(type='button' class='btn btn-danger glyphicon glyphicon-remove' ng-click='delContact(conact._id)')
+                            table(class='table')
+                                thead
+                                    tr
+                                        th M
+                                tbody(ng-repeat="conact in contactBlocks.m")
+                                    tr
+                                        td(style='overflow:hidden')
+                                            div(style='float:left')
+                                                div {{conact.name}}
+                                                div {{conact.mobilePhone}}
+                                            div(style='float:right')
+                                                div
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil' ng-click='openEditDialog(conact._id)')
+                                                    span &nbsp;&nbsp;&nbsp;
+                                                    button(type='button' class='btn btn-danger glyphicon glyphicon-remove' ng-click='delContact(conact._id)')
+                            table(class='table')
+                                thead
+                                    tr
+                                        th N
+                                tbody(ng-repeat="conact in contactBlocks.n")
+                                    tr
+                                        td(style='overflow:hidden')
+                                            div(style='float:left')
+                                                div {{conact.name}}
+                                                div {{conact.mobilePhone}}
+                                            div(style='float:right')
+                                                div
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil' ng-click='openEditDialog(conact._id)')
+                                                    span &nbsp;&nbsp;&nbsp;
+                                                    button(type='button' class='btn btn-danger glyphicon glyphicon-remove' ng-click='delContact(conact._id)')
+                            table(class='table')
+                                thead
+                                    tr
+                                        th O
+                                tbody(ng-repeat="conact in contactBlocks.o")
+                                    tr
+                                        td(style='overflow:hidden')
+                                            div(style='float:left')
+                                                div {{conact.name}}
+                                                div {{conact.mobilePhone}}
+                                            div(style='float:right')
+                                                div
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil' ng-click='openEditDialog(conact._id)')
+                                                    span &nbsp;&nbsp;&nbsp;
+                                                    button(type='button' class='btn btn-danger glyphicon glyphicon-remove' ng-click='delContact(conact._id)')
+                            table(class='table')
+                                thead
+                                    tr
+                                        th P
+                                tbody(ng-repeat="conact in contactBlocks.p")
+                                    tr
+                                        td(style='overflow:hidden')
+                                            div(style='float:left')
+                                                div {{conact.name}}
+                                                div {{conact.mobilePhone}}
+                                            div(style='float:right')
+                                                div
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil' ng-click='openEditDialog(conact._id)')
+                                                    span &nbsp;&nbsp;&nbsp;
+                                                    button(type='button' class='btn btn-danger glyphicon glyphicon-remove' ng-click='delContact(conact._id)')
+                            table(class='table')
+                                thead
+                                    tr
+                                        th Q
+                                tbody(ng-repeat="conact in contactBlocks.q")
+                                    tr
+                                        td(style='overflow:hidden')
+                                            div(style='float:left')
+                                                div {{conact.name}}
+                                                div {{conact.mobilePhone}}
+                                            div(style='float:right')
+                                                div
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil' ng-click='openEditDialog(conact._id)')
+                                                    span &nbsp;&nbsp;&nbsp;
+                                                    button(type='button' class='btn btn-danger glyphicon glyphicon-remove' ng-click='delContact(conact._id)')
+                            table(class='table')
+                                thead
+                                    tr
+                                        th R
+                                tbody(ng-repeat="conact in contactBlocks.r")
+                                    tr
+                                        td(style='overflow:hidden')
+                                            div(style='float:left')
+                                                div {{conact.name}}
+                                                div {{conact.mobilePhone}}
+                                            div(style='float:right')
+                                                div
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil' ng-click='openEditDialog(conact._id)')
+                                                    span &nbsp;&nbsp;&nbsp;
+                                                    button(type='button' class='btn btn-danger glyphicon glyphicon-remove' ng-click='delContact(conact._id)')
+                            table(class='table')
+                                thead
+                                    tr
+                                        th S
+                                tbody(ng-repeat="conact in contactBlocks.s")
+                                    tr
+                                        td(style='overflow:hidden')
+                                            div(style='float:left')
+                                                div {{conact.name}}
+                                                div {{conact.mobilePhone}}
+                                            div(style='float:right')
+                                                div
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil' ng-click='openEditDialog(conact._id)')
+                                                    span &nbsp;&nbsp;&nbsp;
+                                                    button(type='button' class='btn btn-danger glyphicon glyphicon-remove' ng-click='delContact(conact._id)')
+                            table(class='table')
+                                thead
+                                    tr
+                                        th T
+                                tbody(ng-repeat="conact in contactBlocks.t")
+                                    tr
+                                        td(style='overflow:hidden')
+                                            div(style='float:left')
+                                                div {{conact.name}}
+                                                div {{conact.mobilePhone}}
+                                            div(style='float:right')
+                                                div
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil' ng-click='openEditDialog(conact._id)')
+                                                    span &nbsp;&nbsp;&nbsp;
+                                                    button(type='button' class='btn btn-danger glyphicon glyphicon-remove' ng-click='delContact(conact._id)')
+                            table(class='table')
+                                thead
+                                    tr
+                                        th U
+                                tbody(ng-repeat="conact in contactBlocks.u")
+                                    tr
+                                        td(style='overflow:hidden')
+                                            div(style='float:left')
+                                                div {{conact.name}}
+                                                div {{conact.mobilePhone}}
+                                            div(style='float:right')
+                                                div
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil' ng-click='openEditDialog(conact._id)')
+                                                    span &nbsp;&nbsp;&nbsp;
+                                                    button(type='button' class='btn btn-danger glyphicon glyphicon-remove' ng-click='delContact(conact._id)')
+                            table(class='table')
+                                thead
+                                    tr
+                                        th V
+                                tbody(ng-repeat="conact in contactBlocks.v")
+                                    tr
+                                        td(style='overflow:hidden')
+                                            div(style='float:left')
+                                                div {{conact.name}}
+                                                div {{conact.mobilePhone}}
+                                            div(style='float:right')
+                                                div
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil' ng-click='openEditDialog(conact._id)')
+                                                    span &nbsp;&nbsp;&nbsp;
+                                                    button(type='button' class='btn btn-danger glyphicon glyphicon-remove' ng-click='delContact(conact._id)')
+                            table(class='table')
+                                thead
+                                    tr
+                                        th W
+                                tbody(ng-repeat="conact in contactBlocks.w")
+                                    tr
+                                        td(style='overflow:hidden')
+                                            div(style='float:left')
+                                                div {{conact.name}}
+                                                div {{conact.mobilePhone}}
+                                            div(style='float:right')
+                                                div
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil' ng-click='openEditDialog(conact._id)')
+                                                    span &nbsp;&nbsp;&nbsp;
+                                                    button(type='button' class='btn btn-danger glyphicon glyphicon-remove' ng-click='delContact(conact._id)')
+                            table(class='table')
+                                thead
+                                    tr
+                                        th X
+                                tbody(ng-repeat="conact in contactBlocks.x")
+                                    tr
+                                        td(style='overflow:hidden')
+                                            div(style='float:left')
+                                                div {{conact.name}}
+                                                div {{conact.mobilePhone}}
+                                            div(style='float:right')
+                                                div
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil' ng-click='openEditDialog(conact._id)')
+                                                    span &nbsp;&nbsp;&nbsp;
+                                                    button(type='button' class='btn btn-danger glyphicon glyphicon-remove' ng-click='delContact(conact._id)')
+                            table(class='table')
+                                thead
+                                    tr
+                                        th Y
+                                tbody(ng-repeat="conact in contactBlocks.y")
+                                    tr
+                                        td(style='overflow:hidden')
+                                            div(style='float:left')
+                                                div {{conact.name}}
+                                                div {{conact.mobilePhone}}
+                                            div(style='float:right')
+                                                div
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil' ng-click='openEditDialog(conact._id)')
+                                                    span &nbsp;&nbsp;&nbsp;
+                                                    button(type='button' class='btn btn-danger glyphicon glyphicon-remove' ng-click='delContact(conact._id)')
+                            table(class='table')
+                                thead
+                                    tr
+                                        th Z
+                                tbody(ng-repeat="conact in contactBlocks.z")
+                                    tr
+                                        td(style='overflow:hidden')
+                                            div(style='float:left')
+                                                div {{conact.name}}
+                                                div {{conact.mobilePhone}}
+                                            div(style='float:right')
+                                                div
+                                                    button(type='button' class='btn btn-info glyphicon glyphicon-pencil' ng-click='openEditDialog(conact._id)')
+                                                    span &nbsp;&nbsp;&nbsp;
+                                                    button(type='button' class='btn btn-danger glyphicon glyphicon-remove' ng-click='delContact(conact._id)')
+
+block jsFoot
+    script(src='/framework/angularUiBootstrap/0.12.0/ui-bootstrap-tpls.min.js')
+    script(src='/biz/js/ngappContact.js')
