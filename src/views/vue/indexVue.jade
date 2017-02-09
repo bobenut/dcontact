@@ -1,15 +1,15 @@
-extends layoutAg
+extends layoutVue
 
 block cssHead
     link(rel='stylesheet/less', href='/biz/css/screen.less')
 
 block content
-    div.container(ng-app='ngappContact')
+    div#vuecontact.container
         div.row
             div.col-lg-4
                 h1 Contact management
             div.col-lg-8
-                div(class='panel panel-default' style='min-width:500px;box-shadow:4px 4px 10px #888888;' ng-controller='ctrlrContactShow')
+                div(class='panel panel-default' style='min-width:500px;box-shadow:4px 4px 10px #888888;' )
                     div(class="panel-heading")
                         script(type='text/ng-template' id='contactDialog.html').
                             <div class='modal-header'>
@@ -86,12 +86,12 @@ block content
                                 thead
                                     tr
                                         th A
-                                tbody(ng-repeat="conact in contactBlocks.a")
+                                tbody(v-for="conact in contactBlocks.a")
                                     tr
                                         td(style='overflow:hidden')
                                             div(style='float:left')
                                                 div {{conact.name}}
-                                                div {{conact.mobilePhone}}
+                                                div {{conact.mobilePhones}}
                                             div(style='float:right')
                                                 div
                                                     button(type='button' class='btn btn-info glyphicon glyphicon-pencil' ng-click='openEditDialog(conact._id)')
@@ -101,7 +101,7 @@ block content
                                 thead
                                     tr
                                         th B
-                                tbody(ng-repeat="conact in contactBlocks.b")
+                                tbody(v-for="conact in contactBlocks.b")
                                     tr
                                         td(style='overflow:hidden')
                                             div(style='float:left')
@@ -116,7 +116,7 @@ block content
                                 thead
                                     tr
                                         th C
-                                tbody(ng-repeat="conact in contactBlocks.c")
+                                tbody(v-for="conact in contactBlocks.c")
                                     tr
                                         td(style='overflow:hidden')
                                             div(style='float:left')
@@ -131,7 +131,7 @@ block content
                                 thead
                                     tr
                                         th D
-                                tbody(ng-repeat="conact in contactBlocks.d")
+                                tbody(v-for="conact in contactBlocks.d")
                                     tr
                                         td(style='overflow:hidden')
                                             div(style='float:left')
@@ -146,7 +146,7 @@ block content
                                 thead
                                     tr
                                         th E
-                                tbody(ng-repeat="conact in contactBlocks.e")
+                                tbody(v-for="conact in contactBlocks.e")
                                     tr
                                         td(style='overflow:hidden')
                                             div(style='float:left')
@@ -161,7 +161,7 @@ block content
                                 thead
                                     tr
                                         th F
-                                tbody(ng-repeat="conact in contactBlocks.f")
+                                tbody(v-for="conact in contactBlocks.f")
                                     tr
                                         td(style='overflow:hidden')
                                             div(style='float:left')
@@ -176,7 +176,7 @@ block content
                                 thead
                                     tr
                                         th G
-                                tbody(ng-repeat="conact in contactBlocks.g")
+                                tbody(v-for="conact in contactBlocks.g")
                                     tr
                                         td(style='overflow:hidden')
                                             div(style='float:left')
@@ -191,7 +191,7 @@ block content
                                 thead
                                     tr
                                         th H
-                                tbody(ng-repeat="conact in contactBlocks.h")
+                                tbody(v-for="conact in contactBlocks.h")
                                     tr
                                         td(style='overflow:hidden')
                                             div(style='float:left')
@@ -206,7 +206,7 @@ block content
                                 thead
                                     tr
                                         th I
-                                tbody(ng-repeat="conact in contactBlocks.i")
+                                tbody(v-for="conact in contactBlocks.i")
                                     tr
                                         td(style='overflow:hidden')
                                             div(style='float:left')
@@ -221,7 +221,7 @@ block content
                                 thead
                                     tr
                                         th J
-                                tbody(ng-repeat="conact in contactBlocks.j")
+                                tbody(v-for="conact in contactBlocks.j")
                                     tr
                                         td(style='overflow:hidden')
                                             div(style='float:left')
@@ -236,7 +236,7 @@ block content
                                 thead
                                     tr
                                         th K
-                                tbody(ng-repeat="conact in contactBlocks.k")
+                                tbody(v-for="conact in contactBlocks.k")
                                     tr
                                         td(style='overflow:hidden')
                                             div(style='float:left')
@@ -251,7 +251,7 @@ block content
                                 thead
                                     tr
                                         th L
-                                tbody(ng-repeat="conact in contactBlocks.l")
+                                tbody(v-for="conact in contactBlocks.l")
                                     tr
                                         td(style='overflow:hidden')
                                             div(style='float:left')
@@ -266,7 +266,7 @@ block content
                                 thead
                                     tr
                                         th M
-                                tbody(ng-repeat="conact in contactBlocks.m")
+                                tbody(v-for="conact in contactBlocks.m")
                                     tr
                                         td(style='overflow:hidden')
                                             div(style='float:left')
@@ -281,7 +281,7 @@ block content
                                 thead
                                     tr
                                         th N
-                                tbody(ng-repeat="conact in contactBlocks.n")
+                                tbody(v-for="conact in contactBlocks.n")
                                     tr
                                         td(style='overflow:hidden')
                                             div(style='float:left')
@@ -296,7 +296,7 @@ block content
                                 thead
                                     tr
                                         th O
-                                tbody(ng-repeat="conact in contactBlocks.o")
+                                tbody(v-for="conact in contactBlocks.o")
                                     tr
                                         td(style='overflow:hidden')
                                             div(style='float:left')
@@ -311,7 +311,7 @@ block content
                                 thead
                                     tr
                                         th P
-                                tbody(ng-repeat="conact in contactBlocks.p")
+                                tbody(v-for="conact in contactBlocks.p")
                                     tr
                                         td(style='overflow:hidden')
                                             div(style='float:left')
@@ -326,7 +326,7 @@ block content
                                 thead
                                     tr
                                         th Q
-                                tbody(ng-repeat="conact in contactBlocks.q")
+                                tbody(v-for="conact in contactBlocks.q")
                                     tr
                                         td(style='overflow:hidden')
                                             div(style='float:left')
@@ -341,7 +341,7 @@ block content
                                 thead
                                     tr
                                         th R
-                                tbody(ng-repeat="conact in contactBlocks.r")
+                                tbody(v-for="conact in contactBlocks.r")
                                     tr
                                         td(style='overflow:hidden')
                                             div(style='float:left')
@@ -356,7 +356,7 @@ block content
                                 thead
                                     tr
                                         th S
-                                tbody(ng-repeat="conact in contactBlocks.s")
+                                tbody(v-for="conact in contactBlocks.s")
                                     tr
                                         td(style='overflow:hidden')
                                             div(style='float:left')
@@ -371,7 +371,7 @@ block content
                                 thead
                                     tr
                                         th T
-                                tbody(ng-repeat="conact in contactBlocks.t")
+                                tbody(v-for="conact in contactBlocks.t")
                                     tr
                                         td(style='overflow:hidden')
                                             div(style='float:left')
@@ -386,7 +386,7 @@ block content
                                 thead
                                     tr
                                         th U
-                                tbody(ng-repeat="conact in contactBlocks.u")
+                                tbody(v-for="conact in contactBlocks.u")
                                     tr
                                         td(style='overflow:hidden')
                                             div(style='float:left')
@@ -401,7 +401,7 @@ block content
                                 thead
                                     tr
                                         th V
-                                tbody(ng-repeat="conact in contactBlocks.v")
+                                tbody(v-for="conact in contactBlocks.v")
                                     tr
                                         td(style='overflow:hidden')
                                             div(style='float:left')
@@ -416,7 +416,7 @@ block content
                                 thead
                                     tr
                                         th W
-                                tbody(ng-repeat="conact in contactBlocks.w")
+                                tbody(v-for="conact in contactBlocks.w")
                                     tr
                                         td(style='overflow:hidden')
                                             div(style='float:left')
@@ -431,7 +431,7 @@ block content
                                 thead
                                     tr
                                         th X
-                                tbody(ng-repeat="conact in contactBlocks.x")
+                                tbody(v-for="conact in contactBlocks.x")
                                     tr
                                         td(style='overflow:hidden')
                                             div(style='float:left')
@@ -446,7 +446,7 @@ block content
                                 thead
                                     tr
                                         th Y
-                                tbody(ng-repeat="conact in contactBlocks.y")
+                                tbody(v-for="conact in contactBlocks.y")
                                     tr
                                         td(style='overflow:hidden')
                                             div(style='float:left')
@@ -461,7 +461,7 @@ block content
                                 thead
                                     tr
                                         th Z
-                                tbody(ng-repeat="conact in contactBlocks.z")
+                                tbody(v-for="conact in contactBlocks.z")
                                     tr
                                         td(style='overflow:hidden')
                                             div(style='float:left')
@@ -474,5 +474,4 @@ block content
                                                     button(type='button' class='btn btn-danger glyphicon glyphicon-remove' ng-click='delContact(conact._id)')
 
 block jsFoot
-    script(src='/framework/angularUiBootstrap/0.12.0/ui-bootstrap-tpls.min.js')
-    script(src='/biz/js/ngappContact.js')
+    script(src='/biz/js/vueContact.js')
